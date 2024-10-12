@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FONTS -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <link rel="stylesheet" href="dist/css/style.css">
+    <title>Synthera</title>
+    <link rel="icon" href="/images/dashboard/logo-dashboard.png" type="image/x-icon">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+            scroll-behavior: smooth;
+        }
+        .border-gradient {
+            border-image: linear-gradient(#805CFF, #6042CD, #2E1A74) 1; /* Gradiasi border */
+            background-clip: padding-box;
+        }
+        .gradient-button {
+        background: transparent;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 50px;
+        color: #BBACFF;
+        font-size: 16px;
+        cursor: pointer;
+        position: relative;
+        z-index: 1;
+        }
+
+        .gradient-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, #805CFF, #6042CD, #2E1A74);
+        border-radius: 50px;
+        z-index: -1;
+        padding: 2px; /* Ketebalan border */
+        -webkit-mask: 
+            linear-gradient(#fff 0 0) content-box, 
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: destination-out;
+                mask-composite: exclude;
+        }
+
+                *,
+        *::before,
+        *::after {
+        box-sizing: border-box;
+        }
+
+        * {
+        margin: 0;
+        }
+
+
+        @media (min-width: 1024px) {
+            .slider-card .item {
+                width: 32%; /* Show 3 items on larger screens */
+                max-width: 32%;
+            }
+        }
+        @media (min-width: 320px) and (max-width: 767px) { 
+            .slider-card .item {
+                width: 100%; /* Show 3 items on larger screens */
+                max-width: 100%;
+            }
+        }
+
+        @media (min-width: 1920px) and (max-width: 2560px) {
+            #popup-overlay .adjust {
+                margin-top: 160px;
+            }
+        }
+    </style>
+
+    <style>
+        .scroller__inner {
+        padding-block: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        }
+
+        .scroller[data-animated="true"] {
+        overflow: hidden;
+        -webkit-mask: linear-gradient(
+            90deg,
+            transparent,
+            white 20%,
+            white 80%,
+            transparent
+        );
+        mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+        }
+
+        .scroller[data-animated="true"] .scroller__inner {
+        width: max-content;
+        flex-wrap: nowrap;
+        animation: scroll var(--_animation-duration, 40s)
+            var(--_animation-direction, forwards) linear infinite;
+        }
+
+        .scroller[data-direction="right"] {
+        --_animation-direction: reverse;
+        }
+
+        .scroller[data-direction="left"] {
+        --_animation-direction: forwards;
+        }
+
+        .scroller[data-speed="fast"] {
+        --_animation-duration: 40s;
+        }
+
+        .scroller[data-speed="slow"] {
+        --_animation-duration: 50s;
+        }
+
+        @keyframes scroll {
+        to {
+            transform: translate(calc(-50% - 0.5rem));
+        }
+        }
+
+        /* general styles */
+
+        :root {
+        --clr-neutral-100: hsl(0, 0%, 100%);
+        --clr-primary-100: hsl(205, 15%, 58%);
+        --clr-primary-400: hsl(215, 25%, 27%);
+        --clr-primary-800: hsl(217, 33%, 17%);
+        --clr-primary-900: hsl(218, 33%, 9%);
+        }
+
+        .tag-list {
+        margin: 0;
+        padding-inline: 0;
+        list-style: none;
+        }
+
+        .tag-list li {
+        padding: 1rem;
+        border-radius: 0.5rem;
+        }
+
+        /* for testing purposed to ensure the animation lined up correctly */
+        .test {
+        background: red !important;
+        }
+
+    </style>
+    
+    <style>
+        .faqs-container {
+        margin: 0 auto;
+        }
+
+        .faq {
+        background-color: transparent;
+        border: 1px solid #4F72F4;
+        border-radius: 10px;
+        padding: 18px;
+        position: relative;
+        overflow: hidden;
+        margin: 25px 0;
+        transition: 0.3s ease;
+        }
+
+        .faq.active {
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        .faq-title {
+        margin: 0 35px 0 0;
+        }
+
+        .faq-text {
+        display: none;
+        margin: 30px 0 0;
+        color: #FFFFFF;
+        opacity: 60%;
+        }
+
+        .faq.active .faq-text {
+        display: block;
+        }
+
+        .faq-toggle {
+        background-color: transparent;
+        border: none;
+        border-radius: 50%;
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        padding: 0;
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        height: 30px;
+        width: 30px;
+        }
+
+        .faq-toggle:focus {
+        outline: none;
+        }
+
+
+        .faq-toggle .fa-times {
+        display: none;
+        }
+
+        .faq.active .faq-toggle .fa-times {
+        display: block;
+        }
+
+        .faq-toggle .fa-chevron-down {
+        color: white;
+        margin-bottom: 24px;
+        }
+
+        .faq.active .faq-toggle .fa-chevron-down {
+        display: none;
+        }
+
+        @media screen and (max-width: 480px) {
+
+        .social-panel-container.visible {
+            transform: translateX(0px);
+        }
+        
+        .floating-btn {
+            right: 10px;
+        }
+        }
+
+        .loading-screen {
+            position: relative;
+            padding-left: 0;
+            padding-right: 0;
+            padding-top: 0;
+            background-color: #030717;
+            width: 0%;
+            height: 100%;
+        }
+
+        .load-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 10;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden bg-[#030717]" data-barba="wrapper">
+    <div class="load-container z-50">
+        <div class="loading-screen"></div>
+    </div>
+    <main data-barba="container" data-barba-namespace="home-section">
+        <header id="navbar" class="fixed top-0 left-0 w-full z-40 py-2 transition-all duration-300">
+            <nav class="flex justify-between items-center w-[92%] mx-auto py-4">
+                <div>
+                    <img class="w-full h-auto ursor-pointer" src="/images/logo.png" alt="...">
+                </div>
+                <div
+                    id="nav-links"class="nav-links hidden md:flex md:static absolute bg-[#151725] md:bg-transparent md:min-h-fit min-h-[20vh] mt-[90px] xl:mt-0 lg:mt-0 md:mt-0 left-0 top-0 w-full md:w-auto flex-col md:flex-row md:items-center md:gap-[4vw] px-5">
+                    <ul class="flex md:flex-row flex-col md:items-center gap-8 md:gap-[4vw] p-4">
+                        <li><a class="hover:text-gray-500 text-white" href="#city">City Stats</a></li>
+                        <li><a class="hover:text-gray-500 text-white" href="#map">Map Navigator</a></li>
+                        <li><a class="hover:text-gray-500 text-white" href="#features">Features</a></li>
+                        <li><a class="hover:text-gray-500 text-white" href="#reviews">Reviews</a></li>
+                        <li><a class="hover:text-gray-500 text-white" href="#faq">Faq</a></li>
+                    </ul>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="/smart-city.html" class="bg-gradient-to-r from-[#FF0154] to-[#7922B2] text-white px-5 py-2 rounded-lg hover:opacity-90 transition-opacity duration-300">
+                        Explore City
+                    </a>                    
+                    <ion-icon onclick="onToggleMenu()" name="menu" class="text-white text-3xl cursor-pointer md:hidden"></ion-icon>
+                </div>
+            </nav>
+        </header>
+        
+    
+        
+    
+        <div class="section-hero w-full bg-cover bg-center bg-no-repeat xl:aspect-[16/9]" style="background-image: url(/images/hero-bg.png);">
+            <div class="text justify-center items-center text-center pt-12 xl:pt-52">
+                <p class="mb-32"></p>
+                <h1 class="text-4xl xl:text-5xl font-medium max-w-3xl leading- text-white mx-auto uppercase">
+                    Redefining Urban Living with Smart Technology</span>
+                </h1>
+                <p class="mt-5 text-white">- Welcome to the Future of City Life -</p>
+            </div>
+        </div>
+    
+        <div id="city" class="h-auto pt-32 z-20 pb-32 p-4 xl:px-32 mx-auto text-center flex flex-col lg:flex-row xl:flex-row justify-center items-center gap-4">
+            <div class="images">
+                <img src="/images/satistik2.png" alt="">
+            </div>
+            <div class="images">
+                <img src="/images/Satistik1.png" alt="">
+            </div>
+            <div class="images">
+                <img src="/images/Satistik3.png" alt="">
+            </div>
+        </div>
+        
+        
+        <div id="map" class="h-auto pt-32 z-20 pb-32 p-4 xl:px-32 mx-auto">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                <div class="left w-full lg:w-2/3">
+                    <img src="/images/city.png" alt="">
+                </div>
+                <div class="right w-full lg:w-1/3 text-white">
+                    
+                    <button class="gradient-button mb-5">City Navigator</button>
+                    
+                    
+                    <h1 class="text-3xl xl:text-4xl font-semibold leading-normal">
+                        Explore Smaworld in <span class="text-[#7E85FF]">Real-Time</span>
+                    </h1>
+                    <div id="faq-container" class="w-full mt-5">
+                        <!-- FAQ items will be injected here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="features" class="h-auto pt-32 z-20 pb-32 p-4 xl:px-32 mx-auto">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                <div class="title xl:flex lg:flex md:flex justify-between w-full">
+                    <h1 class="text-3xl xl:text-4xl font-semibold leading-normal text-white">
+                        Essential Tools for Effortless Urban Living
+                    </h1>
+                    <button class="gradient-button mt-4 xl:mt-0 lg:mt-0">Smart Features</button>
+                </div>
+            </div>
+            <div class="content mt-12">
+                <!-- Card Container -->
+                <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Row 1: 2 Cards Sebaris pada layar besar, 1 card per baris di mobile -->
+                    <div class="relative bg-cover bg-center bg-no-repeat h-64 flex items-end pt-80 pb-10 px-10 rounded-lg overflow-hidden border-2 border-[#6042CD]" style="background-image: url('/images/bg-card1.png');">
+                        <div class="text-white relative z-10">
+                            <h1 class="text-3xl font-semibold">Traffic Information</h1>
+                            <p class="mt-5">This feature provides real-time information on congested routes. Users can view the map with congestion indicators to choose alternative routes and avoid delays while driving.</p>
+                        </div>
+                    </div>
+                    <div class="relative bg-cover bg-center bg-no-repeat h-64 flex items-end pt-80 pb-10 px-10 rounded-lg overflow-hidden border-2 border-[#6042CD]" style="background-image: url('/images/bg-card2.png');">
+                        <div class="text-white relative z-10">
+                            <h1 class="text-3xl font-semibold">Disaster Alerts</h1>
+                            <p class="mt-5">Receive notifications about potential natural disasters, such as floods, earthquakes, or wildfires. This feature helps users stay safe and informed about necessary evacuation steps.</p>
+                        </div>
+                    </div>
+                
+                    <!-- Row 2: 1 Card Full Width -->
+                    <div class="col-span-1 md:col-span-1 lg:col-span-2 bg-cover bg-center bg-no-repeat h-auto flex items-end py-20 px-10 rounded-lg overflow-hidden border-2 border-[#6042CD]" style="background-image: url('/images/bg-card3.png');">
+                        <div class="text-white w-full flex justify-between">
+                            <div class="hidden left xl:flex lg:flex items-center justify-center xl:w-1/2 w-0">
+                            </div>
+                            <div class="right items-center xl:w-1/2 lg:w-1/2 w-full xl:pr-32 lg:pr-32 md:pr-32">
+                                <h1 class="text-3xl font-semibold mb-5">Community Reporting Services</h1>
+                                <p class="mb-5">Report issues such as potholes, broken streetlights, or environmental concerns directly through the app. This feature enables residents to contribute to maintaining the cleanliness and safety of their city.</p>
+                                <div class="group space-y-2">
+                                    <div class="flex">
+                                        <i class="ri-check-line mr-3 text-[#ACC9FF] text-xl"></i>
+                                        <p class="text-[#EBF2FF]">Report city issues easily.</p>
+                                    </div>
+                                    <div class="flex">
+                                        <i class="ri-check-line mr-3 text-[#ACC9FF] text-xl"></i>
+                                        <p class="text-[#EBF2FF]">Help improve city infrastructure.</p>
+                                    </div>
+                                    <div class="flex">
+                                        <i class="ri-check-line mr-3 text-[#ACC9FF] text-xl"></i>
+                                        <p class="text-[#EBF2FF]">Track issue resolution.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Row 3: 2 Cards Sebaris pada layar besar, 1 card per baris di mobile -->
+                    <div class="relative bg-cover bg-center bg-no-repeat h-64 flex items-end pt-80 pb-10 px-10 rounded-lg overflow-hidden border-2 border-[#6042CD]" style="background-image: url('/images/bg-card4.png');">
+                        <div class="text-white relative z-10">
+                            <h1 class="text-3xl font-semibold">Alternate Route</h1>
+                            <p class="mt-5">When congestion or road disruptions occur, this feature offers recommendations for faster alternative routes. Users can easily find the best paths to reach their destinations without getting stuck in traffic.</p>
+                        </div>
+                    </div>
+                    <div class="relative bg-cover bg-center bg-no-repeat h-64 flex items-end pt-80 pb-10 px-10 rounded-lg overflow-hidden border-2 border-[#6042CD]" style="background-image: url('/images/bg-card5.png');">
+                        <div class="text-white relative z-10">
+                            <h1 class="text-3xl font-semibold">Nearby Public Facilities</h1>
+                            <p class="mt-5">Find nearby public facilities such as restrooms, trash bins, and rest areas. This feature ensures user comfort while engaging in activities outside their homes.</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    
+        <div class="w-full bg-no-repeat bg-center bg-cover flex items-center justify-center pt-32 section section5 pb-32 p-4 xl:px-32 mx-auto" style="background-image: url('/images/bg-trafic.png');">
+            <h1 class="text-white text-5xl font-semibold">Explore Smaworld in Real-Time</h1>
+        </div>  
+    
+        <div id="reviews" class="h-auto pt-32 z-20 pb-32 p-4 xl:px-32 mx-auto">
+            <button class="gradient-button mb-5">What People Say?</button>
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20 mb-12">
+                <div class="title xl:flex justify-between w-full">
+                    <!-- Left Column: Larger width on larger screens -->
+                    <div class="left w-full lg:w-2/3">
+                        <h1 class="text-3xl xl:text-4xl font-semibold leading-normal text-white max-w-lg">
+                            Explore User Insights on Maps Explore's Benefits
+                        </h1>
+                    </div>
+                    <!-- Right Column: Smaller width on larger screens -->
+                    <div class="right w-full lg:w-1/3 mt-4 xl:mt-0">
+                        <p class="text-white">
+                            Discover what our users say about their experience with Maps Explore, and see how it has improved their daily lives in the city.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="scroller" data-speed="fast">
+                <ul class="tag-list scroller__inner">
+                    <li class="p-4 border-2 text-white border-[#461887] max-w-[265px]">
+                        <div class="flex items-center justify-between">
+                            <div class="images flex items-center gap-3">
+                                <img src="/images/profile-slider5.png" alt="">
+                                <h2 class="text-md">Jhons Kane</h2>
+                            </div>
+                            <div class="rate flex gap-3">
+                                <i class="ri-star-fill text-md text-[#1D21E8]"></i>
+                                <p class="text-[#1D21E8]">4/<span class="text-white">4</span></p>
+                            </div>
+                        </div>
+                        <p class="mt-5 text-sm">Finding public facilities has always been a challenge, but Syntera makes it effortless!</p>
+                    </li>
+                    <li class="p-4 border-2 text-white border-[#461887] max-w-[465px]">
+                        <div class="flex items-center justify-between">
+                            <div class="images flex items-center gap-3">
+                                <img src="/images/profile-slider4.png" alt="">
+                                <h2 class="text-md">Janamuna Tegar</h2>
+                            </div>
+                            <div class="rate flex gap-3">
+                                <i class="ri-star-fill text-md text-[#1D21E8]"></i>
+                                <p class="text-[#1D21E8]">4/<span class="text-white">4</span></p>
+                            </div>
+                        </div>
+                        <p class="mt-5 text-sm">I can’t express enough how much I appreciate the disaster alerts feature on Syntera. It keeps my family and me informed about potential emergencies, ensuring we know when to take action.</p>
+                    </li>
+                    <li class="p-4 border-2 text-white border-[#461887] max-w-[366px]">
+                        <div class="flex items-center justify-between">
+                            <div class="images flex items-center gap-3">
+                                <img src="/images/profile-slider3.png" alt="">
+                                <h2 class="text-md">Ishowspeed</h2>
+                            </div>
+                            <div class="rate flex gap-3">
+                                <i class="ri-star-fill text-md text-[#1D21E8]"></i>
+                                <p class="text-[#1D21E8]">4/<span class="text-white">4</span></p>
+                            </div>
+                        </div>
+                        <p class="mt-5 text-sm">empowers users to report issues like potholes and broken streetlights quickly. I feel more connected to my neighborhood and know that my input can help improve our city!</p>
+                    </li>
+                    <li class="p-4 border-2 text-white border-[#461887] max-w-[321px]">
+                        <div class="flex items-center justify-between">
+                            <div class="images flex items-center gap-3">
+                                <img src="/images/profile-slider1.png" alt="">
+                                <h2 class="text-md">Ariqya Catly</h2>
+                            </div>
+                            <div class="rate flex gap-3">
+                                <i class="ri-star-fill text-md text-[#1D21E8]"></i>
+                                <p class="text-[#1D21E8]">4/<span class="text-white">4</span></p>
+                            </div>
+                        </div>
+                        <p class="mt-5 text-sm">The app not only helps me avoid traffic jams but also offers alternative routes that I never knew existed. Thanks!</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="scroller" data-speed="fast" data-direction="right">
+                <ul class="tag-list scroller__inner">
+                    <li class="p-4 border-2 text-white border-[#461887] max-w-[321px]">
+                        <div class="flex items-center justify-between">
+                            <div class="images flex items-center gap-3">
+                                <img src="/images/profile-slider1.png" alt="">
+                                <h2 class="text-md">Ariqya Catly</h2>
+                            </div>
+                            <div class="rate flex gap-3">
+                                <i class="ri-star-fill text-md text-[#1D21E8]"></i>
+                                <p class="text-[#1D21E8]">4/<span class="text-white">4</span></p>
+                            </div>
+                        </div>
+                        <p class="mt-5 text-sm">The app not only helps me avoid traffic jams but also offers alternative routes that I never knew existed. Thanks!</p>
+                    </li>
+                    <li class="p-4 border-2 text-white border-[#461887] max-w-[366px]">
+                        <div class="flex items-center justify-between">
+                            <div class="images flex items-center gap-3">
+                                <img src="/images/profile-slider3.png" alt="">
+                                <h2 class="text-md">Ishowspeed</h2>
+                            </div>
+                            <div class="rate flex gap-3">
+                                <i class="ri-star-fill text-md text-[#1D21E8]"></i>
+                                <p class="text-[#1D21E8]">4/<span class="text-white">4</span></p>
+                            </div>
+                        </div>
+                        <p class="mt-5 text-sm">empowers users to report issues like potholes and broken streetlights quickly. I feel more connected to my neighborhood and know that my input can help improve our city!</p>
+                    </li>
+                    <li class="p-4 border-2 text-white border-[#461887] max-w-[465px]">
+                        <div class="flex items-center justify-between">
+                            <div class="images flex items-center gap-3">
+                                <img src="/images/profile-slider4.png" alt="">
+                                <h2 class="text-md">Janamuna Tegar</h2>
+                            </div>
+                            <div class="rate flex gap-3">
+                                <i class="ri-star-fill text-md text-[#1D21E8]"></i>
+                                <p class="text-[#1D21E8]">4/<span class="text-white">4</span></p>
+                            </div>
+                        </div>
+                        <p class="mt-5 text-sm">I can’t express enough how much I appreciate the disaster alerts feature on Syntera. It keeps my family and me informed about potential emergencies, ensuring we know when to take action.</p>
+                    </li>
+                    <li class="p-4 border-2 text-white border-[#461887] max-w-[265px]">
+                        <div class="flex items-center justify-between">
+                            <div class="images flex items-center gap-3">
+                                <img src="/images/profile-slider5.png" alt="">
+                                <h2 class="text-md">Jhons Kane</h2>
+                            </div>
+                            <div class="rate flex gap-3">
+                                <i class="ri-star-fill text-md text-[#1D21E8]"></i>
+                                <p class="text-[#1D21E8]">4/<span class="text-white">4</span></p>
+                            </div>
+                        </div>
+                        <p class="mt-5 text-sm">Finding public facilities has always been a challenge, but Syntera makes it effortless!</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="faq" class="h-auto pt-32 z-20 pb-32 p-4 xl:px-32 mx-auto">
+            <div class="lg:flex gap-20 items-center">
+                <!-- Right: Diurutkan ke atas pada tampilan mobile -->
+                <div class="right order-1 lg:order-none mt-6 lg:w-1/2 justify-between lg:flex lg:flex-col lg:items-left lg:h-auto text-white">
+                    <div class="text">
+                        <h1 class="text-4xl xl:text-5xl font-normal leading-normal text-white max-w-md">Frequently Asked Questions</h1>
+                        <p class="max-w-sm paragraf mt-5 opacity-60">Find quick answers to common questions and make the most of Maps Explore’s key features, from traffic updates to emergency alerts</p>
+                    </div>
+                    <div class="flex mt-8 button-group">
+                        <a href="#" class="bg-gradient-to-r from-[#62BBEA] via-[#4F72F4] to-[#C261E2] bg-clip-text text-transparent">
+                            Read more FAQ ->
+                        </a>
+                    </div>
+                </div>
+        
+                <!-- Left: Diurutkan ke bawah pada tampilan mobile -->
+                <div class="left order-2 lg:order-none lg:w-1/2 text-white">
+                    <div class="faqs-container">
+                        <div class="faq active">
+                            <h3 class="faq-title text-lg">How do I get real-time traffic updates?</h3>
+                            <p class="faq-text text-base">
+                                You can use live traffic applications such as Google Maps or Waze to get up-to-date information on the traffic conditions in your area.
+                                </p>
+                            <button class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+        
+                        <div class="faq">
+                            <h3 class="faq-title text-lg">How do I report an issue in the city?</h3>
+                            <p class="faq-text text-base">To report an issue, you can use local government apps, hotlines, or websites dedicated to citizen services. Many cities have platforms for reporting problems like broken infrastructure or public disturbances.
+                            </p>
+                            <button class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+        
+                        <div class="faq">
+                            <h3 class="faq-title text-lg">How can I plan my journey through the city?</h3>
+                            <p class="faq-text text-base">Journey planning can be done using map services like Google Maps, Apple Maps, or dedicated public transportation apps that help you navigate routes, schedules, and transportation options.
+                            </p>
+                            <button class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+        
+                        <div class="faq">
+                            <h3 class="faq-title text-lg">How will I be notified of emergencies or disasters?</h3>
+                            <p class="faq-text text-base">Emergency notifications are usually sent through national alert systems, push notifications from weather or government apps, or SMS messages from service providers. You can also subscribe to emergency alert services in your area.
+                            </p>
+                            <button class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="h-auto pt-32 z-20 pb-32 p-4 xl:px-32 mx-auto text-center">
+            <!-- Heading with letter-spacing and centered max-w -->
+            <h1 class="text-white text-2xl xl:text-5xl font-medium max-w-2xl mx-auto leading-relaxed">
+                Start Living in the City of the Future Today!
+            </h1>
+    
+            
+        
+            <!-- Buttons container -->
+            <div class="mt-8 flex justify-center gap-4">
+                <!-- Second Button -->
+                <button 
+                    class="py-3 px-6 text-sm font-medium text-white bg-gradient-to-r from-[#1D21E8] to-[#050898] rounded-lg hover:from-blue-700 hover:to-blue-900"
+                    onclick="window.open('#', '_self')"
+                >
+                    Explore City
+                </button>
+    
+        
+                <!-- Second Button -->
+                <button 
+                    class="py-3 px-6 text-sm font-medium text-black bg-white border-2 rounded-lg border-white hover:opacity-80"
+                    onclick="window.open('#', '_self')"
+                >
+                    Contact Us
+                </button>
+            </div>
+        </div>
+        
+    
+        <div class="relative overflow-visible">
+            <div class="z-[-2] absolute bottom-32 hidden xl:flex lg:flex">
+                <img src="/images/bg-footer2.png" alt="" class="max-w-full h-auto">
+            </div>
+        </div>
+
+        <div class="h-auto pt-32 z-20 pb-16 p-4 xl:px-32 mx-auto">
+            <div class="top lg:flex justify-between">
+                <div class="left lg:w-1/2 text-white">
+                    <div class="images">
+                        <img src="/images/logo.png" alt="">
+                    </div>
+                    <p class="max-w-sm mt-3 opacity-60">Empowering your city experience with innovative maps and features.</p>
+                    <div class="images mt-10 flex gap-3">
+                        <div class="icon">
+                            <img src="/images/icon-footer1.png" alt="">
+                        </div>
+                        <div class="icon">
+                            <img src="/images/icon-footer2.png" alt="">
+                        </div>
+                        <div class="icon">
+                            <img src="/images/icon-footer3.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="right lg:w-1/2 justify-between lg:flex lg:flex-col lg:h-auto items-end text-white">
+                    <div class="flex flex-col lg:flex-row xl:flex-row button-group gap-4 lg:gap-16 mt-5 xl:mt-0">
+                        <a href="#" class="text-white">Home</a>    
+                        <a href="#" class="text-white">Features</a>  
+                        <a href="#" class="text-white">Map Explore</a>  
+                        <a href="#" class="text-white">Reviews</a>      
+                        <a href="#" class="text-white">FAQ</a>              
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Garis pemisah -->
+            <div class="border-t border-gray-500 my-10 opacity-60"></div>
+        
+            <div class="bottom lg:flex justify-between">
+                <div class="left lg:w-1/2 text-white">
+                    <div class="flex flex-col lg:flex-row xl:flex-row button-group gap-4 lg:gap-10 mt-5 xl:mt-0">
+                        <a href="#" class="text-white">Terms of Service</a>    
+                        <a href="#" class="text-white">Privacy Policy</a>  
+                        <a href="#" class="text-white">Legal Notice</a>  
+                        <a href="#" class="text-white">Cookie Setting</a>            
+                    </div>
+                </div>
+                <div class="right lg:w-1/2 justify-between lg:flex lg:flex-col lg:h-auto items-end text-white">
+                    <div class="flex button-group gap-16 mt-5">
+                        <a href="#" class="text-white">© 2024 Syntera. All rights reserved.</a>              
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="dist/js/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://unpkg.com/@barba/core"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <!-- faq -->
+    <script>
+        const toggles = document.querySelectorAll('.faq-toggle');
+
+        toggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            toggle.parentNode.classList.toggle('active');
+        });
+        });
+
+        // SOCIAL PANEL JS
+        const floating_btn = document.querySelector('.floating-btn');
+        const close_btn = document.querySelector('.close-btn');
+        const social_panel_container = document.querySelector('.social-panel-container');
+
+        floating_btn.addEventListener('click', () => {
+        social_panel_container.classList.toggle('visible')
+        });
+
+        close_btn.addEventListener('click', () => {
+        social_panel_container.classList.remove('visible')
+        });
+    </script>
+    <!-- scroll testimoni -->
+    <script>
+        const scrollers = document.querySelectorAll(".scroller");
+
+        // If a user hasn't opted in for recuded motion, then we add the animation
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        addAnimation();
+        }
+
+        function addAnimation() {
+        scrollers.forEach((scroller) => {
+            // add data-animated="true" to every `.scroller` on the page
+            scroller.setAttribute("data-animated", true);
+
+            // Make an array from the elements within `.scroller-inner`
+            const scrollerInner = scroller.querySelector(".scroller__inner");
+            const scrollerContent = Array.from(scrollerInner.children);
+
+            // For each item in the array, clone it
+            // add aria-hidden to it
+            // add it into the `.scroller-inner`
+            scrollerContent.forEach((item) => {
+            const duplicatedItem = item.cloneNode(true);
+            duplicatedItem.setAttribute("aria-hidden", true);
+            scrollerInner.appendChild(duplicatedItem);
+            });
+        });
+}
+
+    </script>
+    <!-- faqs data -->
+    <script>
+        const faqs = [
+            {
+                icon: "/images/icon1.png", 
+                mark: "/images/mark.png",
+                markActive: "/images/mark-active.png",
+                iconActive: "/images/icon-active1.png", 
+                question: "Trafic Intelligent",
+                answer: "Daftar di website kami, buat profil, dan jelajahi peluang franchise yang ada."
+            },
+            {
+                icon: "/images/icon3.png", 
+                mark: "/images/mark.png",
+                markActive: "/images/mark-active.png",
+                iconActive: "/images/icon-active3.png", 
+                question: "Charging Station",
+                answer: "Smaworld utilizes AI to monitor and control traffic throughout the city. This system ensures smoother journeys by reducing congestion and providing real-time alternative routes."
+            },
+            {
+                icon: "/images/icon4.png", 
+                mark: "/images/mark.png",
+                markActive: "/images/mark-active.png",
+                iconActive: "/images/icon-active4.png", 
+                question: "Air Quality",
+                answer: "Mendaftar dan menjelajahi peluang gratis. Layanan premium mungkin dikenakan biaya."
+            },
+            {
+                icon: "/images/icon2.png", 
+                mark: "/images/mark.png",
+                markActive: "/images/mark-active.png",
+                iconActive: "/images/icon-active2.png", 
+                question: "Social Service",
+                answer: "Ya, kami menyediakan sumber daya dan menghubungkan Anda dengan konsultan franchise."
+            }
+        ];
+
+        function createAccordion(containerSelector, faqData) {
+            const container = document.querySelector(containerSelector);
+            faqData.forEach((faq, index) => {
+                const faqItem = document.createElement('div');
+                faqItem.classList.add('py-2', 'w-full');
+
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('cursor-pointer', 'text-lg', 'font-semibold', 'text-gray-600');
+                questionDiv.innerHTML = `
+                    <div class="flex items-center">
+                        <img src="${faq.mark}" alt="mark" class="faq-mark opacity-40 mr-5 mt-5" id="mark-${index}">
+                        <img src="${faq.icon}" alt="icon" class="faq-icon opacity-40 mr-5" id="icon-${index}">
+                        <span class="faq-question text-2xl font-medium">${faq.question}</span>
+                    </div>
+                `;
+
+                const answerDiv = document.createElement('div');
+                answerDiv.classList.add('faq-answer', 'max-h-0', 'max-w-xl', 'ms-8', 'overflow-hidden', 'text-white', 'text-base', 'transition-all');
+                answerDiv.innerText = faq.answer;
+
+                // Add event listener to toggle FAQ
+                questionDiv.addEventListener('click', function () {
+                    const isActive = answerDiv.classList.contains('max-h-0');
+
+                    // Reset all active styles first
+                    document.querySelectorAll('.faq-answer').forEach((el) => {
+                        el.classList.add('max-h-0');
+                    });
+                    document.querySelectorAll('.faq-icon').forEach((el, idx) => {
+                        el.src = faqs[idx].icon;
+                        el.classList.add('opacity-40');
+                    });
+                    document.querySelectorAll('.faq-mark').forEach((el, idx) => {
+                        el.src = faqs[idx].mark;
+                        el.classList.add('opacity-40');
+                    });
+                    document.querySelectorAll('.faq-question').forEach(el => el.classList.remove('text-white'));
+
+                    // Apply active styles to the clicked FAQ
+                    if (isActive) {
+                        answerDiv.classList.remove('max-h-0');
+                        answerDiv.classList.add('max-h-48');
+
+                        document.querySelector(`#icon-${index}`).src = faq.iconActive;
+                        document.querySelector(`#mark-${index}`).src = faq.markActive;
+                        document.querySelector(`#icon-${index}`).classList.remove('opacity-40');
+                        document.querySelector(`#mark-${index}`).classList.remove('opacity-40');
+                        questionDiv.querySelector('.faq-question').classList.add('text-white');
+                    } else {
+                        answerDiv.classList.add('max-h-0');
+                        answerDiv.classList.remove('max-h-48');
+                    }
+                });
+
+                faqItem.appendChild(questionDiv);
+                faqItem.appendChild(answerDiv);
+                container.appendChild(faqItem);
+            });
+        }
+
+        createAccordion('#faq-container', faqs);
+    </script>
+    <!-- responsive navbar -->
+    <script>
+        // Mengubah navbar saat di-scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white', 'backdrop-blur-lg', 'shadow-lg');
+                navLinks.forEach(link => link.classList.remove('text-white'));
+                navLinks.forEach(link => link.classList.add('text-black'));
+            } else {
+                navbar.classList.remove('bg-white', 'backdrop-blur-lg', 'shadow-lg');
+                navLinks.forEach(link => link.classList.remove('text-black'));
+                navLinks.forEach(link => link.classList.add('text-white'));
+            }
+        });
+    </script>
+    <script>
+        // Menampilkan dan menyembunyikan nav-links pada mobile
+        function onToggleMenu() {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('hidden');
+        }
+    
+        // Mengubah background navbar saat scroll
+        window.onscroll = function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-[#141522]', 'backdrop-blur-md', 'shadow-md');
+                const links = navbar.querySelectorAll('a');
+                links.forEach(link => link.classList.add('text-black'));
+            } else {
+                navbar.classList.remove('bg-[#141522]', 'backdrop-blur-md', 'shadow-md');
+                const links = navbar.querySelectorAll('a');
+                links.forEach(link => link.classList.remove('text-black'));
+            }
+        };
+    </script>
+    
+
+    <script>
+        function delay(n) {
+            n = n || 2000;
+            return new Promise((done) => {
+                setTimeout(() => {
+                    done();
+                }, n);
+            });
+        }
+
+        function pageTransition() {
+            var tl = gsap.timeline();
+            tl.to(".loading-screen", {
+                duration: 1.2,
+                width: "100%",
+                left: "0%",
+                ease: "Expo.easeInOut",
+            });
+
+            tl.to(".loading-screen", {
+                duration: 1,
+                width: "100%",
+                left: "100%",
+                ease: "Expo.easeInOut",
+                delay: 0.3,
+            });
+            tl.set(".loading-screen", { left: "-100%" });
+        }
+
+        function contentAnimation() {
+            var tl = gsap.timeline();
+            tl.from(".animate-this", { duration: 1, y: 30, opacity: 0, stagger: 0.4, delay: 0.2 });
+        }
+
+        $(function () {
+            barba.init({
+                sync: true,
+
+                transitions: [
+                    {
+                        async leave(data) {
+                            const done = this.async();
+
+                            pageTransition();
+                            await delay(1000);
+                            done();
+                        },
+
+                        async enter(data) {
+                            contentAnimation();
+                        },
+
+                        async once(data) {
+                            contentAnimation();
+                        },
+                    },
+                ],
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FONTS -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <link rel="stylesheet" href="dist/css/style.css">
+    <title>Synthera</title>
+    <link rel="icon" href="/images/dashboard/logo-dashboard.png" type="image/x-icon">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+            scroll-behavior: smooth;
+        } 
+        
+        body {
+            margin: 0;
+            height: auto;
+            scrollbar-width: none; /* Untuk Firefox */
+        }
+
+        /* Untuk browser berbasis WebKit (Chrome, Safari, Edge) */
+        ::-webkit-scrollbar {
+        width: 0;
+        }
+    
+        /* laptop */
+        #wrapper-card {
+            transform: translateX(-100%);
+            opacity: 0;    
+        }
+        #wrapper-card.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        #wrapper-card {
+            transform: translateX(-100%);
+            opacity: 0;
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+        #wrapper-card.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        /* tempat sampah */
+        #wrapper-card-2 {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        #wrapper-card-2.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        #wrapper-card-2 {
+            transform: translateX(-100%);
+            opacity: 0;
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+        #wrapper-card-2.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        /* petir */
+        #wrapper-card-3 {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        #wrapper-card-3.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        #wrapper-card-3 {
+            transform: translateX(-100%);
+            opacity: 0;
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+        #wrapper-card-3.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        /* keranjang */
+        #wrapper-card-4 {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        #wrapper-card-4.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        #wrapper-card-4 {
+            transform: translateX(-100%);
+            opacity: 0;
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+        #wrapper-card-4.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        /* cangkir kanan */
+        #wrapper-card-5 {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        #wrapper-card-5.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        #wrapper-card-5 {
+            transform: translateX(-100%);
+            opacity: 0;
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+        #wrapper-card-5.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        /* cangkir kiri */
+        #wrapper-card-6 {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        #wrapper-card-6.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        #wrapper-card-6 {
+            transform: translateX(-100%);
+            opacity: 0;
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+        #wrapper-card-6.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        /* coffe */
+        #wrapper-card-7 {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        #wrapper-card-7.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        #wrapper-card-7 {
+            transform: translateX(-100%);
+            opacity: 0;
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+        #wrapper-card-7.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        /* map */
+        #wrapper-card-8 {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        #wrapper-card-8.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        #wrapper-card-8 {
+            transform: translateX(-100%);
+            opacity: 0;
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+        #wrapper-card-8.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* map */
+        #wrapper-card-mobile {
+            transform: translate(-50%, -50%) translateX(-100%); /* Memulai di luar layar */
+            opacity: 0;
+            position: absolute;
+            top: 35%; /* Agar berada di tengah vertikal */
+            left: 50%; /* Agar berada di tengah horizontal */
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+        #wrapper-card-mobile.active {
+            transform: translate(-50%, -50%) translateX(0); /* Ditarik kembali ke tengah layar */
+            opacity: 1;
+        }
+        /* map */
+        #wrapper-card-mobile-2 {
+            
+            transform: translate(-50%, -50%) translateX(-100%); /* Memulai di luar layar */
+            opacity: 0;
+            position: absolute;
+            top: 35%; /* Agar berada di tengah vertikal */
+            left: 50%; /* Agar berada di tengah horizontal */
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+        #wrapper-card-mobile-2.active {
+            
+            transform: translate(-50%, -50%) translateX(0); /* Ditarik kembali ke tengah layar */
+            opacity: 1;
+        }
+        /* map */
+        #wrapper-card-mobile-3 {
+            
+            transform: translate(-50%, -50%) translateX(-100%); /* Memulai di luar layar */
+            opacity: 0;
+            position: absolute;
+            top: 35%; /* Agar berada di tengah vertikal */
+            left: 50%; /* Agar berada di tengah horizontal */
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+        #wrapper-card-mobile-3.active {
+            
+            transform: translate(-50%, -50%) translateX(0); /* Ditarik kembali ke tengah layar */
+            opacity: 1;
+        }
+        /* map */
+        #wrapper-card-mobile-4 {
+            
+            transform: translate(-50%, -50%) translateX(-100%); /* Memulai di luar layar */
+            opacity: 0;
+            position: absolute;
+            top: 35%; /* Agar berada di tengah vertikal */
+            left: 50%; /* Agar berada di tengah horizontal */
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+        #wrapper-card-mobile-4.active {
+            
+            transform: translate(-50%, -50%) translateX(0); /* Ditarik kembali ke tengah layar */
+            opacity: 1;
+        }
+        /* map */
+        #wrapper-card-mobile-5 {
+            
+            transform: translate(-50%, -50%) translateX(-100%); /* Memulai di luar layar */
+            opacity: 0;
+            position: absolute;
+            top: 35%; /* Agar berada di tengah vertikal */
+            left: 50%; /* Agar berada di tengah horizontal */
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+        #wrapper-card-mobile-5.active {
+            
+            transform: translate(-50%, -50%) translateX(0); /* Ditarik kembali ke tengah layar */
+            opacity: 1;
+        }
+        /* map */
+        #wrapper-card-mobile-6 {
+            
+            transform: translate(-50%, -50%) translateX(-100%); /* Memulai di luar layar */
+            opacity: 0;
+            position: absolute;
+            top: 35%; /* Agar berada di tengah vertikal */
+            left: 50%; /* Agar berada di tengah horizontal */
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+        #wrapper-card-mobile-6.active {
+            
+            transform: translate(-50%, -50%) translateX(0); /* Ditarik kembali ke tengah layar */
+            opacity: 1;
+        }
+        /* map */
+        #wrapper-card-mobile-7 {
+            
+            transform: translate(-50%, -50%) translateX(-100%); /* Memulai di luar layar */
+            opacity: 0;
+            position: absolute;
+            top: 35%; /* Agar berada di tengah vertikal */
+            left: 50%; /* Agar berada di tengah horizontal */
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+        #wrapper-card-mobile-7.active {
+            
+            transform: translate(-50%, -50%) translateX(0); /* Ditarik kembali ke tengah layar */
+            opacity: 1;
+        }
+        /* map */
+        #wrapper-card-mobile-8 {
+            
+            transform: translate(-50%, -50%) translateX(-100%); /* Memulai di luar layar */
+            opacity: 0;
+            position: absolute;
+            top: 35%; /* Agar berada di tengah vertikal */
+            left: 50%; /* Agar berada di tengah horizontal */
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+        #wrapper-card-mobile-8.active {
+            
+            transform: translate(-50%, -50%) translateX(0); /* Ditarik kembali ke tengah layar */
+            opacity: 1;
+        }
+        
+
+        .loading-screen {
+            position: relative;
+            padding-left: 0;
+            padding-right: 0;
+            padding-top: 0;
+            background-color: #030717;
+            width: 0%;
+            height: 100%;
+        }
+
+        .load-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        /* Tampilkan elemen mobile dan sembunyikan desktop pada layar dengan lebar maksimal 768px (mobile) */
+        @media (max-width: 768px) {
+            .desktop {
+                display: none;
+            }
+            .mobile {
+                display: block;
+            }
+        }
+
+        /* Tampilkan elemen desktop dan sembunyikan mobile pada layar lebih dari 768px (desktop) */
+        @media (min-width: 769px) {
+            .mobile {
+                display: none;
+            }
+            .desktop {
+                display: block;
+            }
+        }
+
+    </style>
+
+    <style>
+        .mobile {
+            background-position: center;
+            background-repeat: no-repeat;
+            width: auto;
+            min-height: 100vh;
+        }
+
+        /* Style default untuk icon ketika tidak active */
+        .icon-group-maps {
+            transition: background-color 0.3s ease;
+        }
+
+        /* Style untuk icon ketika active */
+        .icon-group-maps.active i {
+            background-color: blue; /* Mengubah background menjadi biru */
+        }
+
+        /* Style untuk gambar-gambar yang ter-hidden */
+        .toggle-image {
+            display: block; /* Gambar terlihat secara default */
+        }
+
+        .toggle-image.hidden {
+            display: none; /* Gambar tersembunyi */
+        }
+
+    </style>
+
+    <style>
+        .navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 50;
+            width: 100%;
+            height: 70px;
+            background: linear-gradient(45deg, #030717, #1d2544);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px 10px 0 0; /* Sudut atas bulat agar lebih estetik */
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Efek bayangan di atas */
+        }
+
+        .navigation ul {
+            display: flex;
+            width: 350px;
+        }
+        .navigation ul li {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            list-style: none;
+            z-index: 1;
+        }
+        .navigation ul li a {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+            font-weight: 500;
+        }
+        .navigation ul li a .icon {
+            position: relative;
+            display: block;
+            line-height: 75px;
+            font-size: 1.5em;
+            text-align: center;
+            color: #fff;
+            transition: .5s;
+        }
+        .navigation ul li.active a .icon {
+            transform: translateY(-32px);
+        }
+        .navigation ul li a .text {
+            position: absolute;
+            color: #fff;
+            font-weight: 400;
+            font-size: .75em;
+            letter-spacing: .05em;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: .5s;
+        }
+        .navigation ul li.active a .text {
+            opacity: 1;
+            transform: translateY(10px);
+        }
+        .navigation ul li a .circle {
+            position: absolute;
+            display: block;
+            width: 50px;
+            height: 50px;
+            background: transparent;
+            border-radius: 50%;
+            border: 1.8px solid #fff;
+            transform: translateY(-37px) scale(0);
+        }
+        .navigation ul li.active a .circle {
+            transition: .5s;
+            transition-delay: .5s;
+            transform: translateY(-37px) scale(1);
+        }
+        .navigation ul li:nth-child(1).active~.indicator {
+            transform: translateX(calc(70px * 0));
+        }
+        .navigation ul li:nth-child(2).active~.indicator {
+            transform: translateX(calc(70px * 1));
+        }
+        .navigation ul li:nth-child(3).active~.indicator {
+            transform: translateX(calc(70px * 2));
+        }
+        .navigation ul li:nth-child(4).active~.indicator {
+            transform: translateX(calc(70px * 3));
+        }
+        .navigation ul li:nth-child(5).active~.indicator {
+            transform: translateX(calc(70px * 4));
+        }
+    </style>
+
+    <style>
+        @keyframes float1 {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+        }
+
+        @keyframes float2 {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-15px);
+        }
+        }
+
+        @keyframes float3 {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-8px);
+        }
+        }
+
+        @keyframes float4 {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-12px);
+        }
+        }
+
+        @keyframes float5 {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-5px);
+        }
+        }
+
+        @keyframes float6 {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+        }
+
+        @keyframes float7 {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-25px);
+        }
+        }
+
+        @keyframes float8 {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-18px);
+        }
+        }
+
+    </style>
+</head>
+<body class="bg-[#030717]">
+    
+    <div class="mobile w-full overflow-hidden" data-aos="fade-zoom-in" data-aos-duration="2000" data-aos-delay="500" style="background-image: url('/images/Map-2.png');">
+        <header class="fixed w-full z-50 top-0">
+            <nav class="flex justify-between items-center xl:px-32 xl:pt-6 mx-auto top-2 gap-3">
+                <a href="/index.html" class="text-white text-3xl font-medium ms-5 mt-5">Syntera.</a>
+                <div class="text-center nav-links duration-500 md:static ms-5 absolute md:min-h-fit top-[-600%] md:w-auto w-[100%] xl:pb-2 lg:pb-2 md:pb-2">
+                    <div class="md:flex items-center gap-3 mt-20 xl:mt-0 lg:mt-0 md:mt-0 ">
+                        <div class="flex gap-4 items-center">
+                            
+                                <img src="/images/icon-map1.png" class="z-20 show-wrapper-card-mobile cursor-pointer top-[8%] left-[48%] w-[48px] h-auto" alt="Icon 1"> <!-- laptop -->
+                            
+                            
+                                <img src="/images/icon-map2.png" class="z-20 show-wrapper-card-mobile-2 cursor-pointer top-[8%] left-[48%] w-[48px] h-auto" alt="Icon 1"> <!-- laptop -->
+                            
+                            
+                                <img src="/images/icon-map3.png" class="z-20 show-wrapper-card-mobile-3 cursor-pointer top-[8%] left-[48%] w-[48px] h-auto" alt="Icon 1"> <!-- laptop -->
+                            
+                            
+                                <img src="/images/icon-map4.png" class="z-20 show-wrapper-card-mobile-4 cursor-pointer top-[8%] left-[48%] w-[48px] h-auto" alt="Icon 1"> <!-- laptop -->
+                            
+                            
+                                <img src="/images/icon-map5.png" class="z-20 show-wrapper-card-mobile-5 cursor-pointer top-[8%] left-[48%] w-[48px] h-auto" alt="Icon 1"> <!-- laptop -->
+                            
+                        </div>
+                        <div class="flex gap-4 items-center mt-5">
+                            
+                                <img src="/images/icon-map5.png" class="z-20 show-wrapper-card-mobile-6 cursor-pointer top-[8%] left-[48%] w-[48px] h-auto" alt="Icon 1"> <!-- laptop -->
+                            
+                            
+                                <img src="/images/icon-map6.png" class="z-20 show-wrapper-card-mobile-7 cursor-pointer top-[8%] left-[48%] w-[48px] h-auto" alt="Icon 1"> <!-- laptop -->
+                            
+                            
+                                <img src="/images/icon-location.png" class="z-20 show-wrapper-card-mobile-8 cursor-pointer top-[8%] left-[48%] w-[48px] h-auto" alt="Icon 1"> <!-- laptop -->
+                            
+                        </div>
+                    </div>
+                    <div class="tems-center bg-white bg-opacity-30 rounded-lg p-2 w-80 lg:flex xl:flex mt-6">
+                        <input 
+                            type="text" 
+                            placeholder="Search" 
+                            class="flex-grow bg-transparent text-white placeholder-white outline-none p-1"
+                        />
+                        <i class="ri-search-line text-white text-xl text-end justify-end items-end"></i>
+                    </div>
+                </div>
+                <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl me-5 mt-5 cursor-pointer md:hidden text-white"></ion-icon>
+            </nav>
+        </header>
+        <!-- card -->
+        <div id="wrapper-card-mobile" class="wrapper-card content max-w-lg absolute px-12 pt-40 space-y-2 z-30 transform translate-x-full transition-transform duration-700">
+            <div class="card p-4 w-[320px] mobile-card h-[322px] rounded-xl bg-white bg-opacity-30 backdrop-blur-5xl">
+                <div class="wrapper w-full h-full bg-cover bg-no-repeat rounded-xl p-6 relative" style="background-image: url('/images/house4.png');">
+                    <i id="close-card-mobile" class="ri-close-line text-2xl text-white bg-[#000000] bg-opacity-30 rounded-lg p-2 cursor-pointer"></i>
+                    <h1 class="absolute bottom-0 left-0 text-white text-xl font-medium p-6 pb-8">Headquarters</h1>
+                </div>                
+            </div>
+            <a href="/map.html">
+            <button class="mt-3 card p-4 w-[320px] mobile-card h-auto rounded-xl text-white bg-gradient-to-r from-[#1D21E8] to-[#050898] hover:from-blue-700 hover:to-blue-900">
+                Start Route
+            </button>
+            </a>
+        </div>
+        <div id="wrapper-card-mobile-2" class="wrapper-card content max-w-lg absolute px-12 pt-40 space-y-2 z-30 transform translate-x-full transition-transform duration-700">
+            <div class="card p-4 w-[320px] mobile-card h-[322px] rounded-xl bg-white bg-opacity-30 backdrop-blur-5xl">
+                <div class="wrapper w-full h-full bg-cover bg-no-repeat rounded-xl p-6 relative" style="background-image: url('/images/house3.png');">
+                    <i id="close-card-mobile-2" class="ri-close-line text-2xl text-white bg-[#000000] bg-opacity-30 rounded-lg p-2 cursor-pointer"></i>
+                    <h1 class="absolute bottom-0 left-0 text-white text-xl font-medium p-6 pb-8">Waste Trash</h1>
+                </div>                
+            </div>
+            <a href="/map.html">
+            <button class="mt-3 card p-4 w-[320px] mobile-card h-auto rounded-xl text-white bg-gradient-to-r from-[#1D21E8] to-[#050898] hover:from-blue-700 hover:to-blue-900">
+                Start Route
+            </button>
+            </a>
+        </div>
+        <div id="wrapper-card-mobile-3" class="wrapper-card content max-w-lg absolute px-12 pt-40 space-y-2 z-30 transform translate-x-full transition-transform duration-700">
+            <div class="card p-4 w-[320px] mobile-card h-[322px] rounded-xl bg-white bg-opacity-30 backdrop-blur-5xl">
+                <div class="wrapper w-full h-full bg-cover bg-no-repeat rounded-xl p-6 relative" style="background-image: url('/images/house2.png');">
+                    <i id="close-card-mobile-3" class="ri-close-line text-2xl text-white bg-[#000000] bg-opacity-30 rounded-lg p-2 cursor-pointer"></i>
+                    <h1 class="absolute bottom-0 left-0 text-white text-xl font-medium p-6 pb-8">Electric Car Charging</h1>
+                </div>                
+            </div>
+            <a href="/map.html">
+            <button class="mt-3 card p-4 w-[320px] mobile-card h-auto rounded-xl text-white bg-gradient-to-r from-[#1D21E8] to-[#050898] hover:from-blue-700 hover:to-blue-900">
+                Start Route
+            </button>
+            </a>
+        </div>
+        <div id="wrapper-card-mobile-4" class="wrapper-card content max-w-lg absolute px-12 pt-40 space-y-2 z-30 transform translate-x-full transition-transform duration-700">
+            <div class="card p-4 w-[320px] mobile-card h-[322px] rounded-xl bg-white bg-opacity-30 backdrop-blur-5xl">
+                <div class="wrapper w-full h-full bg-cover bg-no-repeat rounded-xl p-6 relative" style="background-image: url('/images/house6.png');">
+                    <i id="close-card-mobile-4" class="ri-close-line text-2xl text-white bg-[#000000] bg-opacity-30 rounded-lg p-2 cursor-pointer"></i>
+                    <h1 class="absolute bottom-0 left-0 text-white text-xl font-medium p-6 pb-8">Syntera Market</h1>
+                </div>                
+            </div>
+            <a href="/map.html">
+            <button class="mt-3 card p-4 w-[320px] mobile-card h-auto rounded-xl text-white bg-gradient-to-r from-[#1D21E8] to-[#050898] hover:from-blue-700 hover:to-blue-900">
+                Start Route
+            </button>
+            </a>
+        </div>
+        <div id="wrapper-card-mobile-5" class="wrapper-card content max-w-lg absolute px-12 pt-40 space-y-2 z-30 transform translate-x-full transition-transform duration-700">
+            <div class="card p-4 w-[320px] mobile-card h-[322px] rounded-xl bg-white bg-opacity-30 backdrop-blur-5xl">
+                <div class="wrapper w-full h-full bg-cover bg-no-repeat rounded-xl p-6 relative" style="background-image: url('/images/house5.png');">
+                    <i id="close-card-mobile-5" class="ri-close-line text-2xl text-white bg-[#000000] bg-opacity-30 rounded-lg p-2 cursor-pointer"></i>
+                    <h1 class="absolute bottom-0 left-0 text-white text-xl font-medium p-6 pb-8">Syntera Coffee shop</h1>
+                </div>                
+            </div>
+            <a href="/map.html">
+            <button class="mt-3 card p-4 w-[320px] mobile-card h-auto rounded-xl text-white bg-gradient-to-r from-[#1D21E8] to-[#050898] hover:from-blue-700 hover:to-blue-900">
+                Start Route
+            </button>
+            </a>
+        </div>
+        <div id="wrapper-card-mobile-6" class="wrapper-card content max-w-lg absolute px-12 pt-40 space-y-2 z-30 transform translate-x-full transition-transform duration-700">
+            <div class="card p-4 w-[320px] mobile-card h-[322px] rounded-xl bg-white bg-opacity-30 backdrop-blur-5xl">
+                <div class="wrapper w-full h-full bg-cover bg-no-repeat rounded-xl p-6 relative" style="background-image: url('/images/house8.png');">
+                    <i id="close-card-mobile-6" class="ri-close-line text-2xl text-white bg-[#000000] bg-opacity-30 rounded-lg p-2 cursor-pointer"></i>
+                    <h1 class="absolute bottom-0 left-0 text-white text-xl font-medium p-6 pb-8">Syntera Coffee shop</h1>
+                </div>                
+            </div>
+            <a href="/map.html">
+            <button class="mt-3 card p-4 w-[320px] mobile-card h-auto rounded-xl text-white bg-gradient-to-r from-[#1D21E8] to-[#050898] hover:from-blue-700 hover:to-blue-900">
+                Start Route
+            </button>
+            </a>
+        </div>
+        <div id="wrapper-card-mobile-7" class="wrapper-card content max-w-lg absolute px-12 pt-40 space-y-2 z-30 transform translate-x-full transition-transform duration-700">
+            <div class="card p-4 w-[320px] mobile-card h-[322px] rounded-xl bg-white bg-opacity-30 backdrop-blur-5xl">
+                <div class="wrapper w-full h-full bg-cover bg-no-repeat rounded-xl p-6 relative" style="background-image: url('/images/house7.png');">
+                    <i id="close-card-mobile-7" class="ri-close-line text-2xl text-white bg-[#000000] bg-opacity-30 rounded-lg p-2 cursor-pointer"></i>
+                    <h1 class="absolute bottom-0 left-0 text-white text-xl font-medium p-6 pb-8">Synter Restaurant</h1>
+                </div>                
+            </div>
+            <a href="/map.html">
+            <button class="mt-3 card p-4 w-[320px] mobile-card h-auto rounded-xl text-white bg-gradient-to-r from-[#1D21E8] to-[#050898] hover:from-blue-700 hover:to-blue-900">
+                Start Route
+            </button>
+            </a>
+        </div>
+        <div id="wrapper-card-mobile-8" class="wrapper-card content max-w-lg absolute px-12 pt-40 space-y-2 z-30 transform translate-x-full transition-transform duration-700">
+            <div class="card p-4 w-[320px] mobile-card h-[322px] rounded-xl bg-white bg-opacity-30 backdrop-blur-5xl">
+                <div class="wrapper w-full h-full bg-cover bg-no-repeat rounded-xl p-6 relative" style="background-image: url('/images/house1.png');">
+                    <i id="close-card-mobile-8" class="ri-close-line text-2xl text-white bg-[#000000] bg-opacity-30 rounded-lg p-2 cursor-pointer"></i>
+                    <h1 class="absolute bottom-0 left-0 text-white text-xl font-medium p-6 pb-8">Rasya's House</h1>
+                </div>                
+            </div>
+            <a href="/map.html">
+            <button class="mt-3 card p-4 w-[320px] mobile-card h-auto rounded-xl text-white bg-gradient-to-r from-[#1D21E8] to-[#050898] hover:from-blue-700 hover:to-blue-900">
+                Start Route
+            </button>
+            </a>
+        </div>
+        <!-- card -->
+        <div class="navigation">
+            <ul class="justify-between">
+                <li class="list">
+                    <a href="/public-transportation.html">
+                        <span class="icon">
+                            <i class="ri-train-fill text-2xl text-white bg-white bg-opacity-30 rounded-lg p-3"></i>
+                        </span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="/traffic-destination.html">
+                        <span class="icon">
+                            <i class="ri-traffic-light-line text-2xl text-white bg-white bg-opacity-30 rounded-lg p-3"></i>
+                        </span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="/map.html">
+                        <span class="icon">
+                            <i class="ri-map-pin-2-fill text-2xl text-white bg-white bg-opacity-30 rounded-lg p-3"></i>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+
+
+    <div class="desktop relative h-auto mx-auto bg-cover bg-no-repeat w-full min-h-screen" data-aos="fade-zoom-in" data-aos-duration="2000" data-aos-delay="500" style="background-image: url('/images/map.png'); background-position: center;">
+        <header class="fixed w-full z-50 top-0">
+            <nav class="flex  justify-between items-center p-4 xl:px-32 xl:pt-6 mx-auto top-2 gap-3">
+                <a href="/index.html" class="text-white text-3xl font-medium">Syntera.</a>
+                <div class="text-center nav-links duration-500 md:static absolute md:min-h-fit min-h-[100vh] top-[-600%] md:w-auto w-[100%] xl:pb-2 lg:pb-2 md:pb-2 pb-10">
+                    <div class="md:flex items-center gap-3 mt-20 xl:mt-0 lg:mt-0 md:mt-0">
+                        <div class="flex gap-4 items-center">
+                            <a href="/public-transportation.html" class="icon-group">
+                                <i class="ri-train-fill text-2xl text-white bg-white bg-opacity-30 rounded-lg p-3"></i>
+                            </a>
+                            <div class="tems-center bg-white bg-opacity-30 rounded-lg p-2 w-80 lg:flex xl:flex hidden">
+                                <input 
+                                    type="text" 
+                                    placeholder="Search" 
+                                    class="flex-grow bg-transparent text-white placeholder-white outline-none p-1"
+                                />
+                                <i class="ri-search-line text-white text-xl text-end justify-end items-end"></i>
+                            </div>
+                            <a href="/traffic-destination.html" class="icon-group">
+                                <i class="ri-traffic-light-line text-2xl text-white bg-white bg-opacity-30 rounded-lg p-3"></i>
+                            </a>
+                            <a href="javascript:void(0);" class="icon-group-maps" id="toggleIcon">
+                                <i class="ri-map-pin-2-fill text-2xl text-white bg-white bg-opacity-30 rounded-lg p-3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="tems-center bg-white bg-opacity-30 rounded-lg p-2 w-80 lg:hidden xl:hidden">
+                    <input 
+                        type="text" 
+                        placeholder="Search" 
+                        class="flex-grow bg-transparent text-white placeholder-white outline-none p-1"
+                    />
+                    <i class="ri-search-line text-white text-xl text-end justify-end items-end"></i>
+                </div>
+                <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden text-white"></ion-icon>
+            </nav>
+        </header>
+        <!-- card -->
+        <div id="wrapper-card" class="wrapper-card content max-w-lg absolute px-12 pt-40 space-y-2 z-30 transform translate-x-full transition-transform duration-700">
+            <div class="card p-4 w-[436px] h-[322px] rounded-xl bg-white bg-opacity-30 backdrop-blur-5xl">
+                <div class="wrapper w-full h-full bg-cover bg-no-repeat rounded-xl p-6 relative" style="background-image: url('/images/house4.png');">
+                    <i id="close-card" class="ri-close-line text-2xl text-white bg-[#000000] bg-opacity-30 rounded-lg p-2 cursor-pointer"></i>
+                    <h1 class="absolute bottom-0 left-0 text-white text-xl font-medium p-6 pb-8">Headquarters</h1>
+                </div>                
+            </div>
+            <div class="card p-4 w-[436px] h-auto rounded-xl bg-white bg-opacity-30 backdrop-blur-lg">
+                <div class="wrapper w-full h-full rounded-xl p-2">
+                    <div class="top">
+                        <p class="text-white text-sm font-normal mb-1">YOUR LOCATION</p>
+                        <h1 class="text-white text-xl font-normal">Hasmania Independence Street</h1>
+                    </div>
+                    <div class="line flex items-center">
+                        <hr class="w-full">
+                        <i class="ri-arrow-up-down-fill text-2xl text-white bg-[#A5A5A5] rounded-full p-3 px-4"></i>
+                    </div>
+                    <div class="bottom">
+                        <p class="text-white text-sm font-normal mb-1">DESTINATION</p>
+                        <h1 class="text-white text-xl font-normal">Boulevard Lintas I.e 27</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-4 w-[436px] h-auto rounded-xl bg-white bg-opacity-30 backdrop-blur-lg">
+                <div class="wrapper w-full h-full rounded-xl p-2 justify-between flex">
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">⏳</p>
+                        <p class="text-white text-sm font-normal mb-1">Estimated Arrival</p>
+                        <h1 class="text-white text-lg font-normal">Around 15 min</h1>
+                    </div>
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">🚦</p>
+                        <p class="text-white text-sm font-normal mb-1">Traffic Info</p>
+                        <h1 class="text-white text-lg font-normal">Around 15 min</h1>
+                    </div>
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">👮</p>
+                        <p class="text-white text-sm font-normal mb-1">Police</p>
+                        <h1 class="text-white text-lg font-normal">Inspection</h1>
+                    </div>
+                </div>
+            </div>
+            <a href="/map.html">
+            <button class="mt-3 card p-4 w-[436px] h-auto rounded-xl text-white bg-gradient-to-r from-[#1D21E8] to-[#050898] hover:from-blue-700 hover:to-blue-900">
+                Start Route
+            </button>
+            </a>
+        </div>
+        <div id="wrapper-card-2" class="wrapper-card content max-w-lg absolute px-12 pt-40 space-y-2 z-30 transform translate-x-full transition-transform duration-700">
+            <div class="card p-4 w-[436px] h-[322px] rounded-xl bg-white bg-opacity-30 backdrop-blur-5xl">
+                <div class="wrapper w-full h-full bg-cover bg-no-repeat rounded-xl p-6 relative" style="background-image: url('/images/house3.png');">
+                    <i id="close-card-2" class="ri-close-line text-2xl text-white bg-[#000000] bg-opacity-30 rounded-lg p-2 cursor-pointer"></i>
+                    <h1 class="absolute bottom-0 left-0 text-white text-xl font-medium p-6 pb-8">Waste Trash</h1>
+                </div>                
+            </div>
+            <div class="card p-4 w-[436px] h-auto rounded-xl bg-white bg-opacity-30 backdrop-blur-lg">
+                <div class="wrapper w-full h-full rounded-xl p-2">
+                    <div class="top">
+                        <p class="text-white text-sm font-normal mb-1">YOUR LOCATION</p>
+                        <h1 class="text-white text-xl font-normal">Hasmania Independence Street</h1>
+                    </div>
+                    <div class="line flex items-center">
+                        <hr class="w-full">
+                        <i class="ri-arrow-up-down-fill text-2xl text-white bg-[#A5A5A5] rounded-full p-3 px-4"></i>
+                    </div>
+                    <div class="bottom">
+                        <p class="text-white text-sm font-normal mb-1">DESTINATION</p>
+                        <h1 class="text-white text-xl font-normal">Boulevard Lintas I.e 27</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-4 w-[436px] h-auto rounded-xl bg-white bg-opacity-30 backdrop-blur-lg">
+                <div class="wrapper w-full h-full rounded-xl p-2 justify-between flex">
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">⏳</p>
+                        <p class="text-white text-sm font-normal mb-1">Will be closed</p>
+                        <h1 class="text-white text-lg font-normal">09:00 PM</h1>
+                    </div>
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">🚦</p>
+                        <p class="text-white text-sm font-normal mb-1">Traffic Info</p>
+                        <h1 class="text-white text-lg font-normal">Smooth destination</h1>
+                    </div>
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">👮</p>
+                        <p class="text-white text-sm font-normal mb-1">Police</p>
+                        <h1 class="text-white text-lg font-normal">Inspection</h1>
+                    </div>
+                </div>
+            </div>
+            <a href="/map.html">
+            <button class="mt-3 card p-4 w-[436px] h-auto rounded-xl text-white bg-gradient-to-r from-[#1D21E8] to-[#050898] hover:from-blue-700 hover:to-blue-900">
+                Start Route
+            </button>
+            </a>
+        </div>
+        <div id="wrapper-card-3" class="wrapper-card content max-w-lg absolute px-12 pt-40 space-y-2 z-30 transform translate-x-full transition-transform duration-700">
+            <div class="card p-4 w-[436px] h-[322px] rounded-xl bg-white bg-opacity-30 backdrop-blur-5xl">
+                <div class="wrapper w-full h-full bg-cover bg-no-repeat rounded-xl p-6 relative" style="background-image: url('/images/house2.png');">
+                    <i id="close-card-3" class="ri-close-line text-2xl text-white bg-[#000000] bg-opacity-30 rounded-lg p-2 cursor-pointer"></i>
+                    <h1 class="absolute bottom-0 left-0 text-white text-xl font-medium p-6 pb-8">Electric Car Charging</h1>
+                </div>                
+            </div>
+            <div class="card p-4 w-[436px] h-auto rounded-xl bg-white bg-opacity-30 backdrop-blur-lg">
+                <div class="wrapper w-full h-full rounded-xl p-2">
+                    <div class="top">
+                        <p class="text-white text-sm font-normal mb-1">YOUR LOCATION</p>
+                        <h1 class="text-white text-xl font-normal">Hasmania Independence Street</h1>
+                    </div>
+                    <div class="line flex items-center">
+                        <hr class="w-full">
+                        <i class="ri-arrow-up-down-fill text-2xl text-white bg-[#A5A5A5] rounded-full p-3 px-4"></i>
+                    </div>
+                    <div class="bottom">
+                        <p class="text-white text-sm font-normal mb-1">DESTINATION</p>
+                        <h1 class="text-white text-xl font-normal">Boulevard Lintas I.e 27</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-4 w-[436px] h-auto rounded-xl bg-white bg-opacity-30 backdrop-blur-lg">
+                <div class="wrapper w-full h-full rounded-xl p-2 justify-between flex">
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">⚡</p>
+                        <p class="text-white text-sm font-normal mb-1">Available spots</p>
+                        <h1 class="text-white text-lg font-normal">3 spots available</h1>
+                    </div>
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">🪫</p>
+                        <p class="text-white text-sm font-normal mb-1">Energy consumption</p>
+                        <h1 class="text-white text-lg font-normal">150 kWh</h1>
+                    </div>
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">💳</p>
+                        <p class="text-white text-sm font-normal mb-1">Price</p>
+                        <h1 class="text-white text-lg font-normal">$0.13/kWh</h1>
+                    </div>
+                </div>
+            </div>
+            <a href="/map.html">
+            <button class="mt-3 card p-4 w-[436px] h-auto rounded-xl text-white bg-gradient-to-r from-[#1D21E8] to-[#050898] hover:from-blue-700 hover:to-blue-900">
+                Start Route
+            </button>
+            </a>
+        </div>
+        <div id="wrapper-card-4" class="wrapper-card content max-w-lg absolute px-12 pt-40 space-y-2 z-30 transform translate-x-full transition-transform duration-700">
+            <div class="card p-4 w-[436px] h-[322px] rounded-xl bg-white bg-opacity-30 backdrop-blur-5xl">
+                <div class="wrapper w-full h-full bg-cover bg-no-repeat rounded-xl p-6 relative" style="background-image: url('/images/house6.png');">
+                    <i id="close-card-4" class="ri-close-line text-2xl text-white bg-[#000000] bg-opacity-30 rounded-lg p-2 cursor-pointer"></i>
+                    <h1 class="absolute bottom-0 left-0 text-white text-xl font-medium p-6 pb-8">Syntera Market</h1>
+                </div>                
+            </div>
+            <div class="card p-4 w-[436px] h-auto rounded-xl bg-white bg-opacity-30 backdrop-blur-lg">
+                <div class="wrapper w-full h-full rounded-xl p-2">
+                    <div class="top">
+                        <p class="text-white text-sm font-normal mb-1">YOUR LOCATION</p>
+                        <h1 class="text-white text-xl font-normal">Hasmania Independence Street</h1>
+                    </div>
+                    <div class="line flex items-center">
+                        <hr class="w-full">
+                        <i class="ri-arrow-up-down-fill text-2xl text-white bg-[#A5A5A5] rounded-full p-3 px-4"></i>
+                    </div>
+                    <div class="bottom">
+                        <p class="text-white text-sm font-normal mb-1">DESTINATION</p>
+                        <h1 class="text-white text-xl font-normal">Boulevard Lintas I.e 27</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-4 w-[436px] h-auto rounded-xl bg-white bg-opacity-30 backdrop-blur-lg">
+                <div class="wrapper w-full h-full rounded-xl p-2 justify-between flex">
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">⏳</p>
+                        <p class="text-white text-sm font-normal mb-1">Will be closed</p>
+                        <h1 class="text-white text-lg font-normal">09:00 PM</h1>
+                    </div>
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">🚦</p>
+                        <p class="text-white text-sm font-normal mb-1">Traffic Info</p>
+                        <h1 class="text-white text-lg font-normal">Smooth destination</h1>
+                    </div>
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">👮</p>
+                        <p class="text-white text-sm font-normal mb-1">Police</p>
+                        <h1 class="text-white text-lg font-normal">Inspection</h1>
+                    </div>
+                </div>
+            </div>
+            <a href="/map.html">
+            <button class="mt-3 card p-4 w-[436px] h-auto rounded-xl text-white bg-gradient-to-r from-[#1D21E8] to-[#050898] hover:from-blue-700 hover:to-blue-900">
+                Start Route
+            </button>
+            </a>
+        </div>
+        <div id="wrapper-card-5" class="wrapper-card content max-w-lg absolute px-12 pt-40 space-y-2 z-30 transform translate-x-full transition-transform duration-700">
+            <div class="card p-4 w-[436px] h-[322px] rounded-xl bg-white bg-opacity-30 backdrop-blur-5xl">
+                <div class="wrapper w-full h-full bg-cover bg-no-repeat rounded-xl p-6 relative" style="background-image: url('/images/house5.png');">
+                    <i id="close-card-5" class="ri-close-line text-2xl text-white bg-[#000000] bg-opacity-30 rounded-lg p-2 cursor-pointer"></i>
+                    <h1 class="absolute bottom-0 left-0 text-white text-xl font-medium p-6 pb-8">Syntera Coffee shop</h1>
+                </div>                
+            </div>
+            <div class="card p-4 w-[436px] h-auto rounded-xl bg-white bg-opacity-30 backdrop-blur-lg">
+                <div class="wrapper w-full h-full rounded-xl p-2">
+                    <div class="top">
+                        <p class="text-white text-sm font-normal mb-1">YOUR LOCATION</p>
+                        <h1 class="text-white text-xl font-normal">Hasmania Independence Street</h1>
+                    </div>
+                    <div class="line flex items-center">
+                        <hr class="w-full">
+                        <i class="ri-arrow-up-down-fill text-2xl text-white bg-[#A5A5A5] rounded-full p-3 px-4"></i>
+                    </div>
+                    <div class="bottom">
+                        <p class="text-white text-sm font-normal mb-1">DESTINATION</p>
+                        <h1 class="text-white text-xl font-normal">Boulevard Lintas I.e 27</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-4 w-[436px] h-auto rounded-xl bg-white bg-opacity-30 backdrop-blur-lg">
+                <div class="wrapper w-full h-full rounded-xl p-2 justify-between flex">
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">⏳</p>
+                        <p class="text-white text-sm font-normal mb-1">Will be closed</p>
+                        <h1 class="text-white text-lg font-normal">09:00 PM</h1>
+                    </div>
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">🚦</p>
+                        <p class="text-white text-sm font-normal mb-1">Traffic Info</p>
+                        <h1 class="text-white text-lg font-normal">Smooth destination</h1>
+                    </div>
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">👮</p>
+                        <p class="text-white text-sm font-normal mb-1">Police</p>
+                        <h1 class="text-white text-lg font-normal">Inspection</h1>
+                    </div>
+                </div>
+            </div>
+            <a href="/map.html">
+            <button class="mt-3 card p-4 w-[436px] h-auto rounded-xl text-white bg-gradient-to-r from-[#1D21E8] to-[#050898] hover:from-blue-700 hover:to-blue-900">
+                Start Route
+            </button>
+            </a>
+        </div>
+        <div id="wrapper-card-6" class="wrapper-card content max-w-lg absolute px-12 pt-40 space-y-2 z-30 transform translate-x-full transition-transform duration-700">
+            <div class="card p-4 w-[436px] h-[322px] rounded-xl bg-white bg-opacity-30 backdrop-blur-5xl">
+                <div class="wrapper w-full h-full bg-cover bg-no-repeat rounded-xl p-6 relative" style="background-image: url('/images/house8.png');">
+                    <i id="close-card-6" class="ri-close-line text-2xl text-white bg-[#000000] bg-opacity-30 rounded-lg p-2 cursor-pointer"></i>
+                    <h1 class="absolute bottom-0 left-0 text-white text-xl font-medium p-6 pb-8">Syntera Coffee shop</h1>
+                </div>                
+            </div>
+            <div class="card p-4 w-[436px] h-auto rounded-xl bg-white bg-opacity-30 backdrop-blur-lg">
+                <div class="wrapper w-full h-full rounded-xl p-2">
+                    <div class="top">
+                        <p class="text-white text-sm font-normal mb-1">YOUR LOCATION</p>
+                        <h1 class="text-white text-xl font-normal">Hasmania Independence Street</h1>
+                    </div>
+                    <div class="line flex items-center">
+                        <hr class="w-full">
+                        <i class="ri-arrow-up-down-fill text-2xl text-white bg-[#A5A5A5] rounded-full p-3 px-4"></i>
+                    </div>
+                    <div class="bottom">
+                        <p class="text-white text-sm font-normal mb-1">DESTINATION</p>
+                        <h1 class="text-white text-xl font-normal">Boulevard Lintas I.e 27</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-4 w-[436px] h-auto rounded-xl bg-white bg-opacity-30 backdrop-blur-lg">
+                <div class="wrapper w-full h-full rounded-xl p-2 justify-between flex">
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">⏳</p>
+                        <p class="text-white text-sm font-normal mb-1">Will be closed</p>
+                        <h1 class="text-white text-lg font-normal">09:00 PM</h1>
+                    </div>
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">🚦</p>
+                        <p class="text-white text-sm font-normal mb-1">Traffic Info</p>
+                        <h1 class="text-white text-lg font-normal">Smooth destination</h1>
+                    </div>
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">👮</p>
+                        <p class="text-white text-sm font-normal mb-1">Police</p>
+                        <h1 class="text-white text-lg font-normal">Inspection</h1>
+                    </div>
+                </div>
+            </div>
+            <a href="/map.html">
+            <button class="mt-3 card p-4 w-[436px] h-auto rounded-xl text-white bg-gradient-to-r from-[#1D21E8] to-[#050898] hover:from-blue-700 hover:to-blue-900">
+                Start Route
+            </button>
+            </a>
+        </div>
+        <div id="wrapper-card-7" class="wrapper-card content max-w-lg absolute px-12 pt-40 space-y-2 z-30 transform translate-x-full transition-transform duration-700">
+            <div class="card p-4 w-[436px] h-[322px] rounded-xl bg-white bg-opacity-30 backdrop-blur-5xl">
+                <div class="wrapper w-full h-full bg-cover bg-no-repeat rounded-xl p-6 relative" style="background-image: url('/images/house7.png');">
+                    <i id="close-card-7" class="ri-close-line text-2xl text-white bg-[#000000] bg-opacity-30 rounded-lg p-2 cursor-pointer"></i>
+                    <h1 class="absolute bottom-0 left-0 text-white text-xl font-medium p-6 pb-8">Synter Restaurant</h1>
+                </div>                
+            </div>
+            <div class="card p-4 w-[436px] h-auto rounded-xl bg-white bg-opacity-30 backdrop-blur-lg">
+                <div class="wrapper w-full h-full rounded-xl p-2">
+                    <div class="top">
+                        <p class="text-white text-sm font-normal mb-1">YOUR LOCATION</p>
+                        <h1 class="text-white text-xl font-normal">Hasmania Independence Street</h1>
+                    </div>
+                    <div class="line flex items-center">
+                        <hr class="w-full">
+                        <i class="ri-arrow-up-down-fill text-2xl text-white bg-[#A5A5A5] rounded-full p-3 px-4"></i>
+                    </div>
+                    <div class="bottom">
+                        <p class="text-white text-sm font-normal mb-1">DESTINATION</p>
+                        <h1 class="text-white text-xl font-normal">Boulevard Lintas I.e 27</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-4 w-[436px] h-auto rounded-xl bg-white bg-opacity-30 backdrop-blur-lg">
+                <div class="wrapper w-full h-full rounded-xl p-2 justify-between flex">
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">⏳</p>
+                        <p class="text-white text-sm font-normal mb-1">Estimated Arrival</p>
+                        <h1 class="text-white text-lg font-normal">Around 15 min</h1>
+                    </div>
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">🚦</p>
+                        <p class="text-white text-sm font-normal mb-1">Traffic Info</p>
+                        <h1 class="text-white text-lg font-normal">Around 15 min</h1>
+                    </div>
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">👮</p>
+                        <p class="text-white text-sm font-normal mb-1">Police</p>
+                        <h1 class="text-white text-lg font-normal">Inspection</h1>
+                    </div>
+                </div>
+            </div>
+            <a href="/map.html">
+            <button class="mt-3 card p-4 w-[436px] h-auto rounded-xl text-white bg-gradient-to-r from-[#1D21E8] to-[#050898] hover:from-blue-700 hover:to-blue-900">
+                Start Route
+            </button>
+            </a>
+        </div>
+        <div id="wrapper-card-8" class="wrapper-card content max-w-lg absolute px-12 pt-40 space-y-2 z-30 transform translate-x-full transition-transform duration-700">
+            <div class="card p-4 w-[436px] h-[322px] rounded-xl bg-white bg-opacity-30 backdrop-blur-5xl">
+                <div class="wrapper w-full h-full bg-cover bg-no-repeat rounded-xl p-6 relative" style="background-image: url('/images/house1.png');">
+                    <i id="close-card-8" class="ri-close-line text-2xl text-white bg-[#000000] bg-opacity-30 rounded-lg p-2 cursor-pointer"></i>
+                    <h1 class="absolute bottom-0 left-0 text-white text-xl font-medium p-6 pb-8">Rasya's House</h1>
+                </div>                
+            </div>
+            <div class="card p-4 w-[436px] h-auto rounded-xl bg-white bg-opacity-30 backdrop-blur-lg">
+                <div class="wrapper w-full h-full rounded-xl p-2">
+                    <div class="top">
+                        <p class="text-white text-sm font-normal mb-1">YOUR LOCATION</p>
+                        <h1 class="text-white text-xl font-normal">Hasmania Independence Street</h1>
+                    </div>
+                    <div class="line flex items-center">
+                        <hr class="w-full">
+                        <i class="ri-arrow-up-down-fill text-2xl text-white bg-[#A5A5A5] rounded-full p-3 px-4"></i>
+                    </div>
+                    <div class="bottom">
+                        <p class="text-white text-sm font-normal mb-1">DESTINATION</p>
+                        <h1 class="text-white text-xl font-normal">Boulevard Lintas I.e 27</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-4 w-[436px] h-auto rounded-xl bg-white bg-opacity-30 backdrop-blur-lg">
+                <div class="wrapper w-full h-full rounded-xl p-2 justify-between flex">
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">⏳</p>
+                        <p class="text-white text-sm font-normal mb-1">Estimated Arrival</p>
+                        <h1 class="text-white text-lg font-normal">Around 15 min</h1>
+                    </div>
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">🚦</p>
+                        <p class="text-white text-sm font-normal mb-1">Traffic Info</p>
+                        <h1 class="text-white text-lg font-normal">Around 15 min</h1>
+                    </div>
+                    <div class="group">
+                        <p class="text-white text-2xl font-normal mb-1">👮</p>
+                        <p class="text-white text-sm font-normal mb-1">Police</p>
+                        <h1 class="text-white text-lg font-normal">Inspection</h1>
+                    </div>
+                </div>
+            </div>
+            <a href="/map.html">
+            <button class="mt-3 card p-4 w-[436px] h-auto rounded-xl text-white bg-gradient-to-r from-[#1D21E8] to-[#050898] hover:from-blue-700 hover:to-blue-900">
+                Start Route
+            </button>
+            </a>
+        </div>
+        
+    
+        <!-- Add padding to prevent content overlap -->
+        <div class="pt-32">
+            <!-- Icons on Map -->
+            <div class="relative w-full h-screen">
+                <img src="/images/icon-map1.png" class="hover:mt-3 hover:transition-all z-20 toggle-image show-wrapper-card cursor-pointer absolute top-[8%] left-[48%]" alt="Icon 1"> <!-- laptop -->
+                <img src="/images/icon-map2.png" class="hover:mt-3 hover:transition-all z-20 toggle-image show-wrapper-card-2 cursor-pointer absolute top-[62%] right-[16%]" alt="Icon 2"> <!-- tempat sampah -->
+                <img src="/images/icon-map3.png" class="hover:mt-3 hover:transition-all z-20 toggle-image show-wrapper-card-3 cursor-pointer absolute top-[82%] left-[22%]" alt="Icon 3"> <!-- petir -->
+                <img src="/images/icon-map4.png" class="hover:mt-3 hover:transition-all z-20 toggle-image show-wrapper-card-4 cursor-pointer absolute top-[40%] right-[39%]" alt="Icon 4"> <!-- keranjang -->
+                <img src="/images/icon-map5.png" class="hover:mt-3 hover:transition-all z-20 toggle-image show-wrapper-card-5 cursor-pointer absolute top-[56%] right-[24%]" alt="Icon 5"> <!-- cangkir kanan -->
+                <img src="/images/icon-map5.png" class="hover:mt-3 hover:transition-all z-20 toggle-image show-wrapper-card-6 cursor-pointer absolute top-[58%] left-[38%]" alt="Icon 5"> <!-- cangkir kiri -->
+                <img src="/images/icon-map6.png" class="hover:mt-3 hover:transition-all z-20 toggle-image show-wrapper-card-7 cursor-pointer absolute top-[60%] left-[17%]" alt="Icon 6"> <!-- coffe -->
+                <img src="/images/icon-location.png"class="hover:mt-3 hover:transition-all z-20 show-wrapper-card-8 cursor-pointer absolute top-[58%] right-[47%]" alt="Icon 6"> <!-- map -->
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="dist/js/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        // laptop
+        const image = document.querySelector('.show-wrapper-card');
+        const wrapperCard = document.getElementById('wrapper-card');
+        const closeIcon = document.getElementById('close-card');
+        image.addEventListener('click', () => {
+            wrapperCard.classList.add('active');
+        });
+        closeIcon.addEventListener('click', () => {
+            wrapperCard.classList.remove('active');
+        });
+
+        // tempat sampah
+        const image2 = document.querySelector('.show-wrapper-card-2');
+        const wrapperCard2 = document.getElementById('wrapper-card-2');
+        const closeIcon2 = document.getElementById('close-card-2');
+        image2.addEventListener('click', () => {
+            wrapperCard2.classList.add('active');
+        });
+        closeIcon2.addEventListener('click', () => {
+            wrapperCard2.classList.remove('active');
+        });
+
+        // petir
+        const image3 = document.querySelector('.show-wrapper-card-3');
+        const wrapperCard3 = document.getElementById('wrapper-card-3');
+        const closeIcon3 = document.getElementById('close-card-3');
+        image3.addEventListener('click', () => {
+            wrapperCard3.classList.add('active');
+        });
+        closeIcon3.addEventListener('click', () => {
+            wrapperCard3.classList.remove('active');
+        });
+
+        // keranjang
+        const image4 = document.querySelector('.show-wrapper-card-4');
+        const wrapperCard4 = document.getElementById('wrapper-card-4');
+        const closeIcon4 = document.getElementById('close-card-4');
+        image4.addEventListener('click', () => {
+            wrapperCard4.classList.add('active');
+        });
+        closeIcon4.addEventListener('click', () => {
+            wrapperCard4.classList.remove('active');
+        });
+
+        // cangkir kanan
+        const image5 = document.querySelector('.show-wrapper-card-5');
+        const wrapperCard5 = document.getElementById('wrapper-card-5');
+        const closeIcon5 = document.getElementById('close-card-5');
+        image5.addEventListener('click', () => {
+            wrapperCard5.classList.add('active');
+        });
+        closeIcon5.addEventListener('click', () => {
+            wrapperCard5.classList.remove('active');
+        });
+
+        // cangkir kiri
+        const image6 = document.querySelector('.show-wrapper-card-6');
+        const wrapperCard6 = document.getElementById('wrapper-card-6');
+        const closeIcon6 = document.getElementById('close-card-6');
+        image6.addEventListener('click', () => {
+            wrapperCard6.classList.add('active');
+        });
+        closeIcon6.addEventListener('click', () => {
+            wrapperCard6.classList.remove('active');
+        });
+
+        // coffe
+        const image7 = document.querySelector('.show-wrapper-card-7');
+        const wrapperCard7 = document.getElementById('wrapper-card-7');
+        const closeIcon7 = document.getElementById('close-card-7');
+        image7.addEventListener('click', () => {
+            wrapperCard7.classList.add('active');
+        });
+        closeIcon7.addEventListener('click', () => {
+            wrapperCard7.classList.remove('active');
+        });
+
+        // map
+        const image8 = document.querySelector('.show-wrapper-card-8');
+        const wrapperCard8 = document.getElementById('wrapper-card-8');
+        const closeIcon8 = document.getElementById('close-card-8');
+        image8.addEventListener('click', () => {
+            wrapperCard8.classList.add('active');
+        });
+        closeIcon8.addEventListener('click', () => {
+            wrapperCard8.classList.remove('active');
+        });
+        
+        // map
+        const imageMobile = document.querySelector('.show-wrapper-card-mobile');
+        const wrapperCardMobile = document.getElementById('wrapper-card-mobile');
+        const closeIconMobile = document.getElementById('close-card-mobile');
+        imageMobile.addEventListener('click', () => {
+            wrapperCardMobile.classList.add('active');
+        });
+        closeIconMobile.addEventListener('click', () => {
+            wrapperCardMobile.classList.remove('active');
+        });
+        // map
+        const imageMobile2 = document.querySelector('.show-wrapper-card-mobile-2');
+        const wrapperCardMobile2 = document.getElementById('wrapper-card-mobile-2');
+        const closeIconMobile2 = document.getElementById('close-card-mobile-2');
+        imageMobile2.addEventListener('click', () => {
+            wrapperCardMobile2.classList.add('active');
+        });
+        closeIconMobile2.addEventListener('click', () => {
+            wrapperCardMobile2.classList.remove('active');
+        });
+        // map
+        const imageMobile3 = document.querySelector('.show-wrapper-card-mobile-3');
+        const wrapperCardMobile3 = document.getElementById('wrapper-card-mobile-3');
+        const closeIconMobile3 = document.getElementById('close-card-mobile-3');
+        imageMobile3.addEventListener('click', () => {
+            wrapperCardMobile3.classList.add('active');
+        });
+        closeIconMobile3.addEventListener('click', () => {
+            wrapperCardMobile3.classList.remove('active');
+        });
+        // map
+        const imageMobile4 = document.querySelector('.show-wrapper-card-mobile-4');
+        const wrapperCardMobile4 = document.getElementById('wrapper-card-mobile-4');
+        const closeIconMobile4 = document.getElementById('close-card-mobile-4');
+        imageMobile4.addEventListener('click', () => {
+            wrapperCardMobile4.classList.add('active');
+        });
+        closeIconMobile4.addEventListener('click', () => {
+            wrapperCardMobile4.classList.remove('active');
+        });
+        // map
+        const imageMobile5 = document.querySelector('.show-wrapper-card-mobile-5');
+        const wrapperCardMobile5 = document.getElementById('wrapper-card-mobile-5');
+        const closeIconMobile5 = document.getElementById('close-card-mobile-5');
+        imageMobile5.addEventListener('click', () => {
+            wrapperCardMobile5.classList.add('active');
+        });
+        closeIconMobile5.addEventListener('click', () => {
+            wrapperCardMobile5.classList.remove('active');
+        });
+        // map
+        const imageMobile6 = document.querySelector('.show-wrapper-card-mobile-6');
+        const wrapperCardMobile6 = document.getElementById('wrapper-card-mobile-6');
+        const closeIconMobile6 = document.getElementById('close-card-mobile-6');
+        imageMobile6.addEventListener('click', () => {
+            wrapperCardMobile6.classList.add('active');
+        });
+        closeIconMobile6.addEventListener('click', () => {
+            wrapperCardMobile6.classList.remove('active');
+        });
+        // map
+        const imageMobile7 = document.querySelector('.show-wrapper-card-mobile-7');
+        const wrapperCardMobile7 = document.getElementById('wrapper-card-mobile-7');
+        const closeIconMobile7 = document.getElementById('close-card-mobile-7');
+        imageMobile7.addEventListener('click', () => {
+            wrapperCardMobile7.classList.add('active');
+        });
+        closeIconMobile7.addEventListener('click', () => {
+            wrapperCardMobile7.classList.remove('active');
+        });
+        // map
+        const imageMobile8 = document.querySelector('.show-wrapper-card-mobile-8');
+        const wrapperCardMobile8 = document.getElementById('wrapper-card-mobile-8');
+        const closeIconMobile8 = document.getElementById('close-card-mobile-8');
+        imageMobile8.addEventListener('click', () => {
+            wrapperCardMobile8.classList.add('active');
+        });
+        closeIconMobile8.addEventListener('click', () => {
+            wrapperCardMobile8.classList.remove('active');
+        });
+    </script>
+    <script>
+        // Mengambil elemen yang dibutuhkan
+        const toggleIcon = document.getElementById('toggleIcon');
+        const images = document.querySelectorAll('.toggle-image');
+
+        // Fungsi untuk toggle active class dan hide/show images
+        toggleIcon.addEventListener('click', function() {
+            // Toggle status active
+            toggleIcon.classList.toggle('active');
+            
+            // Jika ada class active, sembunyikan gambar
+            if (toggleIcon.classList.contains('active')) {
+                images.forEach(image => {
+                    image.classList.add('hidden'); // Hide gambar
+                });
+            } else {
+                // Jika tidak ada class active, tampilkan gambar
+                images.forEach(image => {
+                    image.classList.remove('hidden'); // Show gambar
+                });
+            }
+        });
+    </script>
+    <script>
+        AOS.init();
+    </script>
+    <script>
+        const navLinks = document.querySelector('.nav-links');
+        const dropdown = document.querySelector('.relative.group');
+        const dropdownMenu = dropdown.querySelector('ul');
+
+        function onToggleMenu(e) {
+            e.name = e.name === 'menu' ? 'close' : 'menu';
+            navLinks.classList.toggle('top-[9%]');
+        }
+
+        dropdown.addEventListener('click', () => {
+            dropdownMenu.classList.toggle('hidden');
+        });
+    </script>
+    <script>
+        const list = document.querySelectorAll('.list');
+        function activeLink() {
+            list.forEach((item) =>
+            item.classList.remove('active'));
+            this.classList.add('active');
+        }
+        list.forEach((item) =>
+        item.addEventListener('click',activeLink));
+    </script>
+</div>
+
+</html>

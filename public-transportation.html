@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FONTS -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <link rel="stylesheet" href="dist/css/style.css">
+    <title>Synthera</title>
+    <link rel="icon" href="/images/dashboard/logo-dashboard.png" type="image/x-icon">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+            scroll-behavior: smooth;
+        }
+        ::-webkit-scrollbar {
+        width: 0;
+        }
+
+        .loading-screen {
+            position: relative;
+            padding-left: 0;
+            padding-right: 0;
+            padding-top: 0;
+            background-color: #030717;
+            width: 0%;
+            height: 100%;
+        }
+
+        .load-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 10;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden bg-[#141522]" data-barba="wrapper">
+    <div class="load-container z-50">
+        <div class="loading-screen"></div>
+    </div>
+    <main data-barba="container" data-barba-namespace="public-section" data-aos="fade-zoom-in" data-aos-duration="2000" data-aos-delay="500">
+        <div class="h-auto p-4 xl:px-12 xl:py-12 mx-auto">
+            <div class="title flex justify-start gap-3 items-center mb-10 mt-10">
+                <a href="/smart-city.html">
+                    <i class="ri-arrow-left-s-line text-2xl text-white bg-white bg-opacity-30 rounded-lg p-2 py-1"></i>
+                </a>
+                <h1 class="text-2xl xl:text-3xl text-white">Syntera Public Transport</h1>
+            </div>
+            <div class="flex-row w-full lg:flex xl:flex gap-6 mb-6">
+                <div class="right lg:w-[40%] xl:w-[40%] w-full">
+                    <div class="bg-[#030717] border border-[#030717] shadow-md shadow-black/5 p-6 rounded-md mb-5 overflow-x-hidden">
+                        <div class="h-auto space-y-4 no-scrollbar">
+                            <div class="justify-between w-full xl:flex lg:flex space-y-3 xl:space-y-0 lg:space-y-0 border-[#393939] gap-4">
+                                <div class="flex text-start w-full items-center text-white justify-between rounded-lg px-5 py-4 border border-[#393939] gap-2">
+                                    <div class="text flex items-center gap-2">
+                                        <i class="ri-map-pin-line text-xl"></i>
+                                        <h1>From</h1>
+                                    </div>
+                                    <div class="group-input">
+                                        <select class="w-full pt-1 pb-1 text-sm font-light bg-[#030717] border border-[#393939]  text-white rounded-lg" name="industrialfield" required>
+                                            <option value="" disabled selected>Independence Street</option>
+                                            <option value="BPR">BPR</option>
+                                            <option value="E-Commerce">E-Commerce</option>
+                                            <option value="Education">Education</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="flex text-start w-full items-center text-white justify-between rounded-lg px-5 py-4 border border-[#393939] gap-2">
+                                    <div class="text flex items-center gap-2">
+                                        <i class="ri-map-pin-line text-xl"></i>
+                                        <h1>To</h1>
+                                    </div>
+                                    <div class="group-input">
+                                        <select class="w-full pt-1 pb-1 text-sm font-light bg-[#030717] border border-[#393939]  text-white rounded-lg" name="industrialfield" required>
+                                            <option value="" disabled selected>Boulevard Lintas i.e 27</option>
+                                            <option value="BPR">BPR</option>
+                                            <option value="E-Commerce">E-Commerce</option>
+                                            <option value="Education">Education</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="justify-between w-full xl:flex lg:flex space-y-3 xl:space-y-0 lg:space-y-0 border-[#393939] gap-4">
+                                <div class="group-input w-full items-center">
+                                    <select class="w-full px-5 py-4 text-sm font-light text-start bg-[#030717] border border-[#393939]  text-white rounded-lg" name="industrialfield" required>
+                                        <option value="" disabled selected>All Class</option>
+                                        <option value="BPR">All Class</option>
+                                        <option value="E-Commerce">All Class</option>
+                                        <option value="Education">All Class</option>
+                                    </select>
+                                </div>
+                                <div class="group-input w-full items-center">
+                                    <input type="date" id="date" name="date" class="w-full px-5 py-4 text-sm font-light text-start bg-[#030717] border border-[#393939]  text-white rounded-lg" required>
+                                </div>
+                                <div class="group-input flex w-full items-center px-5 py-4 text-sm font-light text-start bg-[#030717] border border-[#393939]  justify-between text-white rounded-lg">
+                                    <i class="ri-subtract-line text-[#555555] border border-[#555555] px-1 rounded-md bg-[#2B2E2B]"></i>
+                                    <div class="group flex gap-2">
+                                        <i class="ri-group-fill"> 1</i>
+                                    </div>
+                                    <i class="ri-add-fill text-[#1C6DE7] border border-[#1C6DE7] px-1 rounded-md bg-[#2B2E2B]"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-[#030717] border border-[#030717] shadow-md shadow-black/5 p-6 rounded-md mb-5 overflow-x-hidden">
+                        <div class="h-auto space-y-8 no-scrollbar">
+                            <div class="justify-between w-full flex border-[#393939] gap-4">
+                                <div class="flex text-start w-full items-center text-white gap-4">
+                                    <div class="images">
+                                        <img src="/images/icon-bus.png" alt="">
+                                    </div>
+                                    <div class="text space-y-1">
+                                        <h1>#238179 - Rasya Express</h1>
+                                        <p class="text-sm text-[#B1B1B1]">Business Class</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center text-white justify-end text-end">
+                                    <p class="text-[#1CE730] border border-[#1CE730] px-2 rounded-md bg-[#2B2E2B]">$14</p>
+                                </div>
+                            </div>
+                            <div class="justify-between w-full flex border-[#393939] gap-4">
+                                <div class="text space-y-1 w-full">
+                                    <h1 class="text-[#B1B1B1]">SYNTERA CITY (SYC)</h1>
+                                    <p class="text-sm text-[#1C6DE7]">01:00 AM</p>
+                                </div>
+                                <div class="text space-y-1 w-full text-end justify-end">
+                                    <h1 class="text-[#B1B1B1]">SYNTERA CITY (SYC)</h1>
+                                    <p class="text-sm text-[#1C6DE7]">01:00 AM</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="opacity-50 mt-3 mb-3">
+                        <div class="h-auto space-y-8 no-scrollbar">
+                            <div class="justify-between w-full lg:flex xl:flex border-[#393939] gap-4">
+                                <div class="flex text-start w-full items-center text-white gap-2">
+                                    <p class="text-[#828282] border border-[#828282] px-2 py-1 rounded-md text-sm">One-way</p>
+                                    <i class="ri-group-fill text-[#828282] border border-[#828282] px-2 py-1 rounded-md text-sm"> 1</i>
+                                    <p class="text-[#828282] border border-[#828282] px-2 py-1 rounded-md text-sm">1x meal</p>
+                                    <i class="ri-base-station-line text-[#828282] border border-[#828282] px-2 py-1 rounded-md text-sm"> WiFi</i>
+                                </div>
+                                <div class="flex items-center text-white mt-3 xl:mt-0 lg:mt-0 lg:justify-end xl:justify-end lg:text-end xl:text-end">
+                                    <p class="text-[#1C6DE7] border border-[#1C6DE7] text-base px-2 py-1 rounded-md bg-[#2B2E2B]">Purchase</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-[#030717] border border-[#030717] shadow-md shadow-black/5 p-6 rounded-md mb-5 overflow-x-hidden">
+                        <div class="h-auto space-y-8 no-scrollbar">
+                            <div class="justify-between w-full flex border-[#393939] gap-4">
+                                <div class="flex text-start w-full items-center text-white gap-4">
+                                    <div class="images">
+                                        <img src="/images/icon-bus.png" alt="">
+                                    </div>
+                                    <div class="text space-y-1">
+                                        <h1>#238179 - Rasya Express</h1>
+                                        <p class="text-sm text-[#B1B1B1]">Business Class</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center text-white justify-end text-end">
+                                    <p class="text-[#1CE730] border border-[#1CE730] px-2 rounded-md bg-[#2B2E2B]">$14</p>
+                                </div>
+                            </div>
+                            <div class="justify-between w-full flex border-[#393939] gap-4">
+                                <div class="text space-y-1 w-full">
+                                    <h1 class="text-[#B1B1B1]">SYNTERA CITY (SYC)</h1>
+                                    <p class="text-sm text-[#1C6DE7]">01:00 AM</p>
+                                </div>
+                                <div class="text space-y-1 w-full text-end justify-end">
+                                    <h1 class="text-[#B1B1B1]">SYNTERA CITY (SYC)</h1>
+                                    <p class="text-sm text-[#1C6DE7]">01:00 AM</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="opacity-50 mt-3 mb-3">
+                        <div class="h-auto space-y-8 no-scrollbar">
+                            <div class="justify-between w-full lg:flex xl:flex border-[#393939] gap-4">
+                                <div class="flex text-start w-full items-center text-white gap-2">
+                                    <p class="text-[#828282] border border-[#828282] px-2 py-1 rounded-md text-sm">One-way</p>
+                                    <i class="ri-group-fill text-[#828282] border border-[#828282] px-2 py-1 rounded-md text-sm"> 1</i>
+                                    <p class="text-[#828282] border border-[#828282] px-2 py-1 rounded-md text-sm">1x meal</p>
+                                    <i class="ri-base-station-line text-[#828282] border border-[#828282] px-2 py-1 rounded-md text-sm"> WiFi</i>
+                                </div>
+                                <div class="flex items-center text-white mt-3 xl:mt-0 lg:mt-0 lg:justify-end xl:justify-end lg:text-end xl:text-end">
+                                    <p class="text-[#1C6DE7] border border-[#1C6DE7] text-base px-2 py-1 rounded-md bg-[#2B2E2B]">Purchase</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-[#030717] border border-[#030717] shadow-md shadow-black/5 p-6 rounded-md mb-5 overflow-x-hidden">
+                        <div class="h-auto space-y-8 no-scrollbar">
+                            <div class="justify-between w-full flex border-[#393939] gap-4">
+                                <div class="flex text-start w-full items-center text-white gap-4">
+                                    <div class="images">
+                                        <img src="/images/icon-bus.png" alt="">
+                                    </div>
+                                    <div class="text space-y-1">
+                                        <h1>#238179 - Rasya Express</h1>
+                                        <p class="text-sm text-[#B1B1B1]">Business Class</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center text-white justify-end text-end">
+                                    <p class="text-[#1CE730] border border-[#1CE730] px-2 rounded-md bg-[#2B2E2B]">$14</p>
+                                </div>
+                            </div>
+                            <div class="justify-between w-full flex border-[#393939] gap-4">
+                                <div class="text space-y-1 w-full">
+                                    <h1 class="text-[#B1B1B1]">SYNTERA CITY (SYC)</h1>
+                                    <p class="text-sm text-[#1C6DE7]">01:00 AM</p>
+                                </div>
+                                <div class="text space-y-1 w-full text-end justify-end">
+                                    <h1 class="text-[#B1B1B1]">SYNTERA CITY (SYC)</h1>
+                                    <p class="text-sm text-[#1C6DE7]">01:00 AM</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="opacity-50 mt-3 mb-3">
+                        <div class="h-auto space-y-8 no-scrollbar">
+                            <div class="justify-between w-full lg:flex xl:flex border-[#393939] gap-4">
+                                <div class="flex text-start w-full items-center text-white gap-2">
+                                    <p class="text-[#828282] border border-[#828282] px-2 py-1 rounded-md text-sm">One-way</p>
+                                    <i class="ri-group-fill text-[#828282] border border-[#828282] px-2 py-1 rounded-md text-sm"> 1</i>
+                                    <p class="text-[#828282] border border-[#828282] px-2 py-1 rounded-md text-sm">1x meal</p>
+                                    <i class="ri-base-station-line text-[#828282] border border-[#828282] px-2 py-1 rounded-md text-sm"> WiFi</i>
+                                </div>
+                                <div class="flex items-center text-white mt-3 xl:mt-0 lg:mt-0 lg:justify-end xl:justify-end lg:text-end xl:text-end">
+                                    <p class="text-[#1C6DE7] border border-[#1C6DE7] text-base px-2 py-1 rounded-md bg-[#2B2E2B]">Purchase</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-[#030717] border border-[#030717] shadow-md shadow-black/5 p-6 rounded-md overflow-x-hidden">
+                        <div class="h-auto space-y-8 no-scrollbar">
+                            <div class="justify-between w-full flex border-[#393939] gap-4">
+                                <div class="flex text-start w-full items-center text-white gap-4">
+                                    <div class="images">
+                                        <img src="/images/icon-bus.png" alt="">
+                                    </div>
+                                    <div class="text space-y-1">
+                                        <h1>#238179 - Rasya Express</h1>
+                                        <p class="text-sm text-[#B1B1B1]">Business Class</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center text-white justify-end text-end">
+                                    <p class="text-[#1CE730] border border-[#1CE730] px-2 rounded-md bg-[#2B2E2B]">$14</p>
+                                </div>
+                            </div>
+                            <div class="justify-between w-full flex border-[#393939] gap-4">
+                                <div class="text space-y-1 w-full">
+                                    <h1 class="text-[#B1B1B1]">SYNTERA CITY (SYC)</h1>
+                                    <p class="text-sm text-[#1C6DE7]">01:00 AM</p>
+                                </div>
+                                <div class="text space-y-1 w-full text-end justify-end">
+                                    <h1 class="text-[#B1B1B1]">SYNTERA CITY (SYC)</h1>
+                                    <p class="text-sm text-[#1C6DE7]">01:00 AM</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="opacity-50 mt-3 mb-3">
+                        <div class="h-auto space-y-8 no-scrollbar">
+                            <div class="justify-between w-full lg:flex xl:flex border-[#393939] gap-4">
+                                <div class="flex text-start w-full items-center text-white gap-2">
+                                    <p class="text-[#828282] border border-[#828282] px-2 py-1 rounded-md text-sm">One-way</p>
+                                    <i class="ri-group-fill text-[#828282] border border-[#828282] px-2 py-1 rounded-md text-sm"> 1</i>
+                                    <p class="text-[#828282] border border-[#828282] px-2 py-1 rounded-md text-sm">1x meal</p>
+                                    <i class="ri-base-station-line text-[#828282] border border-[#828282] px-2 py-1 rounded-md text-sm"> WiFi</i>
+                                </div>
+                                <div class="flex items-center text-white mt-3 xl:mt-0 lg:mt-0 lg:justify-end xl:justify-end lg:text-end xl:text-end">
+                                    <p class="text-[#1C6DE7] border border-[#1C6DE7] text-base px-2 py-1 rounded-md bg-[#2B2E2B]">Purchase</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="left lg:w-[60%] xl:w-[60%] w-full mt-8 xl:mt-0 lg:mt-0">
+                    <div class="bg-[#030717] border border-[#030717] shadow-md w-full h-[371px] shadow-black/5 p-6 rounded-md mb-5 bg-cover bg-no-repeat" style="background-image: url(/images/traffic.png);">    
+                    </div>
+                    <div class="group-rectangle justify-between gap-4 w-full xl:flex lg:flex md:flex">
+                        <div class="bg-[#030717] border border-[#030717] shadow-md w-full h-auto shadow-black/5 p-6 rounded-3xl mb-5 flex flex-col justify-between"> 
+                            <div class="group mb-12">
+                                <i class="ri-train-fill text-2xl text-white"></i>
+                                <h1 class="text-white">Train Frequency</h1>
+                            </div>
+                            <div class="group space-y-3">
+                                <div class="text-group flex gap-3">
+                                    <h1 class="text-white text-5xl">15</h1>
+                                    <p class="text-base text-[#B1B1B1] mt-4">min</p>
+                                </div>
+                                <p class="text-sm text-[#B1B1B1]">Trains arrive every 5 minutes. Stay updated for smooth transit.</p>
+                            </div>
+                        </div>  
+                        <div class="bg-[#030717] border border-[#030717] shadow-md w-full h-auto shadow-black/5 p-6 rounded-3xl mb-5 flex flex-col justify-between"> 
+                            <div class="group mb-12">
+                                <i class="ri-group-fill text-2xl text-white"></i>
+                                <h1 class="text-white">Passenger Volume</h1>
+                            </div>
+                            <div class="group space-y-3">
+                                <div class="text-group flex gap-3">
+                                    <h1 class="text-white text-5xl">85%</h1>
+                                    <p class="text-base text-[#B1B1B1] mt-4">High</p>
+                                </div>
+                                <p class="text-sm text-[#B1B1B1]">Current passenger volume is moderate.</p>
+                            </div>
+                        </div> 
+                        <div class="bg-[#030717] border border-[#030717] shadow-md w-full h-auto shadow-black/5 p-6 rounded-3xl mb-5 flex flex-col justify-between"> 
+                            <div class="group mb-12">
+                                <i class="ri-speed-up-fill text-2xl text-white"></i>
+                                <h1 class="text-white">Train Speed</h1>
+                            </div>
+                            <div class="group space-y-3">
+                                <div class="text-group flex gap-3">
+                                    <h1 class="text-white text-5xl">80</h1>
+                                    <p class="text-base text-[#B1B1B1] mt-4">km/h</p>
+                                </div>
+                                <p class="text-sm text-[#B1B1B1]">Trains arrive every 5 minutes. Stay updated for smooth transit.</p>
+                            </div>
+                        </div> 
+                    </div> 
+                    <div class="group-rectangle justify-between gap-4 w-full xl:flex lg:flex md:flex">
+                        <div class="bg-[#030717] border border-[#030717] shadow-md w-full h-auto shadow-black/5 p-6 rounded-3xl mb-5 flex flex-col justify-between"> 
+                            <div class="group mb-12">
+                                <i class="ri-coupon-3-fill text-2xl text-white"></i>
+                                <h1 class="text-white">Ticket Availability</h1>
+                            </div>
+                            <div class="group space-y-3">
+                                <div class="text-group flex gap-3">
+                                    <h1 class="text-white text-5xl">48%</h1>
+                                </div>
+                                <p class="text-sm text-[#B1B1B1]">Plenty of tickets are available for purchase.</p>
+                            </div>
+                        </div>  
+                        <div class="bg-[#030717] border border-[#030717] shadow-md w-full h-auto shadow-black/5 p-6 rounded-3xl mb-5 flex flex-col justify-between"> 
+                            <div class="group mb-12">
+                                <i class="ri-profile-fill text-2xl text-white"></i>
+                                <h1 class="text-white">Platform Crowding</h1>
+                            </div>
+                            <div class="group space-y-3">
+                                <div class="text-group flex gap-3">
+                                    <h1 class="text-white text-5xl">95%</h1>
+                                    <p class="text-base text-[#B1B1B1] mt-4">High</p>
+                                </div>
+                                <p class="text-sm text-[#B1B1B1]">The platform is currently crowded. Please queue patiently.</p>
+                            </div>
+                        </div> 
+                        <div class="bg-[#030717] border border-[#030717] shadow-md w-full h-auto shadow-black/5 p-6 rounded-3xl mb-5 flex flex-col justify-between"> 
+                            <div class="group mb-12">
+                                <i class="ri-error-warning-fill text-2xl text-white"></i>
+                                <h1 class="text-white">Service Disruptions</h1>
+                            </div>
+                            <div class="group space-y-3">
+                                <div class="text-group flex gap-3">
+                                    <h1 class="text-white text-5xl">Good</h1>
+                                </div>
+                                <p class="text-sm text-[#B1B1B1]">No service disruptions. MRT is operating as scheduled.</p>
+                            </div>
+                        </div> 
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="dist/js/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://unpkg.com/@barba/core"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+
+    <script>
+        AOS.init();
+    </script>
+
+    <script>
+        function delay(n) {
+            n = n || 2000;
+            return new Promise((done) => {
+                setTimeout(() => {
+                    done();
+                }, n);
+            });
+        }
+
+        function pageTransition() {
+            var tl = gsap.timeline();
+            tl.to(".loading-screen", {
+                duration: 1.2,
+                width: "100%",
+                left: "0%",
+                ease: "Expo.easeInOut",
+            });
+
+            tl.to(".loading-screen", {
+                duration: 1,
+                width: "100%",
+                left: "100%",
+                ease: "Expo.easeInOut",
+                delay: 0.3,
+            });
+            tl.set(".loading-screen", { left: "-100%" });
+        }
+
+        function contentAnimation() {
+            var tl = gsap.timeline();
+            tl.from(".animate-this", { duration: 1, y: 30, opacity: 0, stagger: 0.4, delay: 0.2 });
+        }
+
+        $(function () {
+            barba.init({
+                sync: true,
+
+                transitions: [
+                    {
+                        async leave(data) {
+                            const done = this.async();
+
+                            pageTransition();
+                            await delay(1000);
+                            done();
+                        },
+
+                        async enter(data) {
+                            contentAnimation();
+                        },
+
+                        async once(data) {
+                            contentAnimation();
+                        },
+                    },
+                ],
+            });
+        });
+    </script>
+</body>
+
+</html>
